@@ -1,164 +1,164 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" xmlns:xhtml="http://www.w3.org/1999/xhtml">
   <url>
-    <loc>https://oasis-trip-cyan.vercel.app/</loc>
-    <xhtml:link rel="alternate" hreflang="es-ES" href="https://oasis-trip-cyan.vercel.app/"/>
-    <xhtml:link rel="alternate" hreflang="pt-BR" href="https://oasis-trip-cyan.vercel.app/pt"/>
-    <xhtml:link rel="alternate" hreflang="en-US" href="https://oasis-trip-cyan.vercel.app/en"/>
-    <xhtml:link rel="alternate" hreflang="x-default" href="https://oasis-trip-cyan.vercel.app/"/>
+    <loc>https://www.oasistripturismo.com/</loc>
+    <xhtml:link rel="alternate" hreflang="es-ES" href="https://www.oasistripturismo.com/"/>
+    <xhtml:link rel="alternate" hreflang="pt-BR" href="https://www.oasistripturismo.com/pt"/>
+    <xhtml:link rel="alternate" hreflang="en-US" href="https://www.oasistripturismo.com/en"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.oasistripturismo.com/"/>
     <changefreq>weekly</changefreq>
     <priority>1.0</priority>
   </url>
   <url>
-    <loc>https://oasis-trip-cyan.vercel.app/pt</loc>
-    <xhtml:link rel="alternate" hreflang="es-ES" href="https://oasis-trip-cyan.vercel.app/"/>
-    <xhtml:link rel="alternate" hreflang="pt-BR" href="https://oasis-trip-cyan.vercel.app/pt"/>
-    <xhtml:link rel="alternate" hreflang="en-US" href="https://oasis-trip-cyan.vercel.app/en"/>
-    <xhtml:link rel="alternate" hreflang="x-default" href="https://oasis-trip-cyan.vercel.app/"/>
+    <loc>https://www.oasistripturismo.com/pt</loc>
+    <xhtml:link rel="alternate" hreflang="es-ES" href="https://www.oasistripturismo.com/"/>
+    <xhtml:link rel="alternate" hreflang="pt-BR" href="https://www.oasistripturismo.com/pt"/>
+    <xhtml:link rel="alternate" hreflang="en-US" href="https://www.oasistripturismo.com/en"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.oasistripturismo.com/"/>
     <changefreq>weekly</changefreq>
     <priority>1.0</priority>
   </url>
   <url>
-    <loc>https://oasis-trip-cyan.vercel.app/en</loc>
-    <xhtml:link rel="alternate" hreflang="es-ES" href="https://oasis-trip-cyan.vercel.app/"/>
-    <xhtml:link rel="alternate" hreflang="pt-BR" href="https://oasis-trip-cyan.vercel.app/pt"/>
-    <xhtml:link rel="alternate" hreflang="en-US" href="https://oasis-trip-cyan.vercel.app/en"/>
-    <xhtml:link rel="alternate" hreflang="x-default" href="https://oasis-trip-cyan.vercel.app/"/>
+    <loc>https://www.oasistripturismo.com/en</loc>
+    <xhtml:link rel="alternate" hreflang="es-ES" href="https://www.oasistripturismo.com/"/>
+    <xhtml:link rel="alternate" hreflang="pt-BR" href="https://www.oasistripturismo.com/pt"/>
+    <xhtml:link rel="alternate" hreflang="en-US" href="https://www.oasistripturismo.com/en"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.oasistripturismo.com/"/>
     <changefreq>weekly</changefreq>
     <priority>1.0</priority>
   </url>
   <url>
-    <loc>https://oasis-trip-cyan.vercel.app/servicios</loc>
-    <xhtml:link rel="alternate" hreflang="es-ES" href="https://oasis-trip-cyan.vercel.app/servicios"/>
-    <xhtml:link rel="alternate" hreflang="pt-BR" href="https://oasis-trip-cyan.vercel.app/pt/servicios"/>
-    <xhtml:link rel="alternate" hreflang="en-US" href="https://oasis-trip-cyan.vercel.app/en/servicios"/>
-    <xhtml:link rel="alternate" hreflang="x-default" href="https://oasis-trip-cyan.vercel.app/servicios"/>
+    <loc>https://www.oasistripturismo.com/servicios</loc>
+    <xhtml:link rel="alternate" hreflang="es-ES" href="https://www.oasistripturismo.com/servicios"/>
+    <xhtml:link rel="alternate" hreflang="pt-BR" href="https://www.oasistripturismo.com/pt/servicios"/>
+    <xhtml:link rel="alternate" hreflang="en-US" href="https://www.oasistripturismo.com/en/servicios"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.oasistripturismo.com/servicios"/>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://oasis-trip-cyan.vercel.app/pt/servicios</loc>
-    <xhtml:link rel="alternate" hreflang="es-ES" href="https://oasis-trip-cyan.vercel.app/servicios"/>
-    <xhtml:link rel="alternate" hreflang="pt-BR" href="https://oasis-trip-cyan.vercel.app/pt/servicios"/>
-    <xhtml:link rel="alternate" hreflang="en-US" href="https://oasis-trip-cyan.vercel.app/en/servicios"/>
-    <xhtml:link rel="alternate" hreflang="x-default" href="https://oasis-trip-cyan.vercel.app/servicios"/>
+    <loc>https://www.oasistripturismo.com/pt/servicios</loc>
+    <xhtml:link rel="alternate" hreflang="es-ES" href="https://www.oasistripturismo.com/servicios"/>
+    <xhtml:link rel="alternate" hreflang="pt-BR" href="https://www.oasistripturismo.com/pt/servicios"/>
+    <xhtml:link rel="alternate" hreflang="en-US" href="https://www.oasistripturismo.com/en/servicios"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.oasistripturismo.com/servicios"/>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://oasis-trip-cyan.vercel.app/en/servicios</loc>
-    <xhtml:link rel="alternate" hreflang="es-ES" href="https://oasis-trip-cyan.vercel.app/servicios"/>
-    <xhtml:link rel="alternate" hreflang="pt-BR" href="https://oasis-trip-cyan.vercel.app/pt/servicios"/>
-    <xhtml:link rel="alternate" hreflang="en-US" href="https://oasis-trip-cyan.vercel.app/en/servicios"/>
-    <xhtml:link rel="alternate" hreflang="x-default" href="https://oasis-trip-cyan.vercel.app/servicios"/>
+    <loc>https://www.oasistripturismo.com/en/servicios</loc>
+    <xhtml:link rel="alternate" hreflang="es-ES" href="https://www.oasistripturismo.com/servicios"/>
+    <xhtml:link rel="alternate" hreflang="pt-BR" href="https://www.oasistripturismo.com/pt/servicios"/>
+    <xhtml:link rel="alternate" hreflang="en-US" href="https://www.oasistripturismo.com/en/servicios"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.oasistripturismo.com/servicios"/>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://oasis-trip-cyan.vercel.app/venezuela</loc>
-    <xhtml:link rel="alternate" hreflang="es-ES" href="https://oasis-trip-cyan.vercel.app/venezuela"/>
-    <xhtml:link rel="alternate" hreflang="pt-BR" href="https://oasis-trip-cyan.vercel.app/pt/venezuela"/>
-    <xhtml:link rel="alternate" hreflang="en-US" href="https://oasis-trip-cyan.vercel.app/en/venezuela"/>
-    <xhtml:link rel="alternate" hreflang="x-default" href="https://oasis-trip-cyan.vercel.app/venezuela"/>
+    <loc>https://www.oasistripturismo.com/venezuela</loc>
+    <xhtml:link rel="alternate" hreflang="es-ES" href="https://www.oasistripturismo.com/venezuela"/>
+    <xhtml:link rel="alternate" hreflang="pt-BR" href="https://www.oasistripturismo.com/pt/venezuela"/>
+    <xhtml:link rel="alternate" hreflang="en-US" href="https://www.oasistripturismo.com/en/venezuela"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.oasistripturismo.com/venezuela"/>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://oasis-trip-cyan.vercel.app/pt/venezuela</loc>
-    <xhtml:link rel="alternate" hreflang="es-ES" href="https://oasis-trip-cyan.vercel.app/venezuela"/>
-    <xhtml:link rel="alternate" hreflang="pt-BR" href="https://oasis-trip-cyan.vercel.app/pt/venezuela"/>
-    <xhtml:link rel="alternate" hreflang="en-US" href="https://oasis-trip-cyan.vercel.app/en/venezuela"/>
-    <xhtml:link rel="alternate" hreflang="x-default" href="https://oasis-trip-cyan.vercel.app/venezuela"/>
+    <loc>https://www.oasistripturismo.com/pt/venezuela</loc>
+    <xhtml:link rel="alternate" hreflang="es-ES" href="https://www.oasistripturismo.com/venezuela"/>
+    <xhtml:link rel="alternate" hreflang="pt-BR" href="https://www.oasistripturismo.com/pt/venezuela"/>
+    <xhtml:link rel="alternate" hreflang="en-US" href="https://www.oasistripturismo.com/en/venezuela"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.oasistripturismo.com/venezuela"/>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://oasis-trip-cyan.vercel.app/en/venezuela</loc>
-    <xhtml:link rel="alternate" hreflang="es-ES" href="https://oasis-trip-cyan.vercel.app/venezuela"/>
-    <xhtml:link rel="alternate" hreflang="pt-BR" href="https://oasis-trip-cyan.vercel.app/pt/venezuela"/>
-    <xhtml:link rel="alternate" hreflang="en-US" href="https://oasis-trip-cyan.vercel.app/en/venezuela"/>
-    <xhtml:link rel="alternate" hreflang="x-default" href="https://oasis-trip-cyan.vercel.app/venezuela"/>
+    <loc>https://www.oasistripturismo.com/en/venezuela</loc>
+    <xhtml:link rel="alternate" hreflang="es-ES" href="https://www.oasistripturismo.com/venezuela"/>
+    <xhtml:link rel="alternate" hreflang="pt-BR" href="https://www.oasistripturismo.com/pt/venezuela"/>
+    <xhtml:link rel="alternate" hreflang="en-US" href="https://www.oasistripturismo.com/en/venezuela"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.oasistripturismo.com/venezuela"/>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://oasis-trip-cyan.vercel.app/colombia</loc>
-    <xhtml:link rel="alternate" hreflang="es-ES" href="https://oasis-trip-cyan.vercel.app/colombia"/>
-    <xhtml:link rel="alternate" hreflang="pt-BR" href="https://oasis-trip-cyan.vercel.app/pt/colombia"/>
-    <xhtml:link rel="alternate" hreflang="en-US" href="https://oasis-trip-cyan.vercel.app/en/colombia"/>
-    <xhtml:link rel="alternate" hreflang="x-default" href="https://oasis-trip-cyan.vercel.app/colombia"/>
+    <loc>https://www.oasistripturismo.com/colombia</loc>
+    <xhtml:link rel="alternate" hreflang="es-ES" href="https://www.oasistripturismo.com/colombia"/>
+    <xhtml:link rel="alternate" hreflang="pt-BR" href="https://www.oasistripturismo.com/pt/colombia"/>
+    <xhtml:link rel="alternate" hreflang="en-US" href="https://www.oasistripturismo.com/en/colombia"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.oasistripturismo.com/colombia"/>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://oasis-trip-cyan.vercel.app/pt/colombia</loc>
-    <xhtml:link rel="alternate" hreflang="es-ES" href="https://oasis-trip-cyan.vercel.app/colombia"/>
-    <xhtml:link rel="alternate" hreflang="pt-BR" href="https://oasis-trip-cyan.vercel.app/pt/colombia"/>
-    <xhtml:link rel="alternate" hreflang="en-US" href="https://oasis-trip-cyan.vercel.app/en/colombia"/>
-    <xhtml:link rel="alternate" hreflang="x-default" href="https://oasis-trip-cyan.vercel.app/colombia"/>
+    <loc>https://www.oasistripturismo.com/pt/colombia</loc>
+    <xhtml:link rel="alternate" hreflang="es-ES" href="https://www.oasistripturismo.com/colombia"/>
+    <xhtml:link rel="alternate" hreflang="pt-BR" href="https://www.oasistripturismo.com/pt/colombia"/>
+    <xhtml:link rel="alternate" hreflang="en-US" href="https://www.oasistripturismo.com/en/colombia"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.oasistripturismo.com/colombia"/>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://oasis-trip-cyan.vercel.app/en/colombia</loc>
-    <xhtml:link rel="alternate" hreflang="es-ES" href="https://oasis-trip-cyan.vercel.app/colombia"/>
-    <xhtml:link rel="alternate" hreflang="pt-BR" href="https://oasis-trip-cyan.vercel.app/pt/colombia"/>
-    <xhtml:link rel="alternate" hreflang="en-US" href="https://oasis-trip-cyan.vercel.app/en/colombia"/>
-    <xhtml:link rel="alternate" hreflang="x-default" href="https://oasis-trip-cyan.vercel.app/colombia"/>
+    <loc>https://www.oasistripturismo.com/en/colombia</loc>
+    <xhtml:link rel="alternate" hreflang="es-ES" href="https://www.oasistripturismo.com/colombia"/>
+    <xhtml:link rel="alternate" hreflang="pt-BR" href="https://www.oasistripturismo.com/pt/colombia"/>
+    <xhtml:link rel="alternate" hreflang="en-US" href="https://www.oasistripturismo.com/en/colombia"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.oasistripturismo.com/colombia"/>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://oasis-trip-cyan.vercel.app/brasil</loc>
-    <xhtml:link rel="alternate" hreflang="es-ES" href="https://oasis-trip-cyan.vercel.app/brasil"/>
-    <xhtml:link rel="alternate" hreflang="pt-BR" href="https://oasis-trip-cyan.vercel.app/pt/brasil"/>
-    <xhtml:link rel="alternate" hreflang="en-US" href="https://oasis-trip-cyan.vercel.app/en/brasil"/>
-    <xhtml:link rel="alternate" hreflang="x-default" href="https://oasis-trip-cyan.vercel.app/brasil"/>
+    <loc>https://www.oasistripturismo.com/brasil</loc>
+    <xhtml:link rel="alternate" hreflang="es-ES" href="https://www.oasistripturismo.com/brasil"/>
+    <xhtml:link rel="alternate" hreflang="pt-BR" href="https://www.oasistripturismo.com/pt/brasil"/>
+    <xhtml:link rel="alternate" hreflang="en-US" href="https://www.oasistripturismo.com/en/brasil"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.oasistripturismo.com/brasil"/>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://oasis-trip-cyan.vercel.app/pt/brasil</loc>
-    <xhtml:link rel="alternate" hreflang="es-ES" href="https://oasis-trip-cyan.vercel.app/brasil"/>
-    <xhtml:link rel="alternate" hreflang="pt-BR" href="https://oasis-trip-cyan.vercel.app/pt/brasil"/>
-    <xhtml:link rel="alternate" hreflang="en-US" href="https://oasis-trip-cyan.vercel.app/en/brasil"/>
-    <xhtml:link rel="alternate" hreflang="x-default" href="https://oasis-trip-cyan.vercel.app/brasil"/>
+    <loc>https://www.oasistripturismo.com/pt/brasil</loc>
+    <xhtml:link rel="alternate" hreflang="es-ES" href="https://www.oasistripturismo.com/brasil"/>
+    <xhtml:link rel="alternate" hreflang="pt-BR" href="https://www.oasistripturismo.com/pt/brasil"/>
+    <xhtml:link rel="alternate" hreflang="en-US" href="https://www.oasistripturismo.com/en/brasil"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.oasistripturismo.com/brasil"/>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://oasis-trip-cyan.vercel.app/en/brasil</loc>
-    <xhtml:link rel="alternate" hreflang="es-ES" href="https://oasis-trip-cyan.vercel.app/brasil"/>
-    <xhtml:link rel="alternate" hreflang="pt-BR" href="https://oasis-trip-cyan.vercel.app/pt/brasil"/>
-    <xhtml:link rel="alternate" hreflang="en-US" href="https://oasis-trip-cyan.vercel.app/en/brasil"/>
-    <xhtml:link rel="alternate" hreflang="x-default" href="https://oasis-trip-cyan.vercel.app/brasil"/>
+    <loc>https://www.oasistripturismo.com/en/brasil</loc>
+    <xhtml:link rel="alternate" hreflang="es-ES" href="https://www.oasistripturismo.com/brasil"/>
+    <xhtml:link rel="alternate" hreflang="pt-BR" href="https://www.oasistripturismo.com/pt/brasil"/>
+    <xhtml:link rel="alternate" hreflang="en-US" href="https://www.oasistripturismo.com/en/brasil"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.oasistripturismo.com/brasil"/>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://oasis-trip-cyan.vercel.app/contacto</loc>
-    <xhtml:link rel="alternate" hreflang="es-ES" href="https://oasis-trip-cyan.vercel.app/contacto"/>
-    <xhtml:link rel="alternate" hreflang="pt-BR" href="https://oasis-trip-cyan.vercel.app/pt/contacto"/>
-    <xhtml:link rel="alternate" hreflang="en-US" href="https://oasis-trip-cyan.vercel.app/en/contacto"/>
-    <xhtml:link rel="alternate" hreflang="x-default" href="https://oasis-trip-cyan.vercel.app/contacto"/>
+    <loc>https://www.oasistripturismo.com/contacto</loc>
+    <xhtml:link rel="alternate" hreflang="es-ES" href="https://www.oasistripturismo.com/contacto"/>
+    <xhtml:link rel="alternate" hreflang="pt-BR" href="https://www.oasistripturismo.com/pt/contacto"/>
+    <xhtml:link rel="alternate" hreflang="en-US" href="https://www.oasistripturismo.com/en/contacto"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.oasistripturismo.com/contacto"/>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://oasis-trip-cyan.vercel.app/pt/contacto</loc>
-    <xhtml:link rel="alternate" hreflang="es-ES" href="https://oasis-trip-cyan.vercel.app/contacto"/>
-    <xhtml:link rel="alternate" hreflang="pt-BR" href="https://oasis-trip-cyan.vercel.app/pt/contacto"/>
-    <xhtml:link rel="alternate" hreflang="en-US" href="https://oasis-trip-cyan.vercel.app/en/contacto"/>
-    <xhtml:link rel="alternate" hreflang="x-default" href="https://oasis-trip-cyan.vercel.app/contacto"/>
+    <loc>https://www.oasistripturismo.com/pt/contacto</loc>
+    <xhtml:link rel="alternate" hreflang="es-ES" href="https://www.oasistripturismo.com/contacto"/>
+    <xhtml:link rel="alternate" hreflang="pt-BR" href="https://www.oasistripturismo.com/pt/contacto"/>
+    <xhtml:link rel="alternate" hreflang="en-US" href="https://www.oasistripturismo.com/en/contacto"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.oasistripturismo.com/contacto"/>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://oasis-trip-cyan.vercel.app/en/contacto</loc>
-    <xhtml:link rel="alternate" hreflang="es-ES" href="https://oasis-trip-cyan.vercel.app/contacto"/>
-    <xhtml:link rel="alternate" hreflang="pt-BR" href="https://oasis-trip-cyan.vercel.app/pt/contacto"/>
-    <xhtml:link rel="alternate" hreflang="en-US" href="https://oasis-trip-cyan.vercel.app/en/contacto"/>
-    <xhtml:link rel="alternate" hreflang="x-default" href="https://oasis-trip-cyan.vercel.app/contacto"/>
+    <loc>https://www.oasistripturismo.com/en/contacto</loc>
+    <xhtml:link rel="alternate" hreflang="es-ES" href="https://www.oasistripturismo.com/contacto"/>
+    <xhtml:link rel="alternate" hreflang="pt-BR" href="https://www.oasistripturismo.com/pt/contacto"/>
+    <xhtml:link rel="alternate" hreflang="en-US" href="https://www.oasistripturismo.com/en/contacto"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.oasistripturismo.com/contacto"/>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
