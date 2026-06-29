@@ -10,11 +10,15 @@
     "postinstall": "nuxt prepare"
   },
   "dependencies": {
-    "nuxt": "^3.13.2",
+    "nuxt": "3.13.2",
     "vue": "^3.5.12",
     "vue-router": "^4.4.5"
   },
   "devDependencies": {
-    "@nuxtjs/i18n": "^8.5.5"
+    "@nuxtjs/i18n": "8.5.5"
+  },
+  "overrides": {
+    "unhead": "^1.11.0",
+    "@unhead/vue": "^1.11.0"
   }
 }
