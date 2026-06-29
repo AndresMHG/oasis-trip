@@ -1,6 +1,6 @@
 // Centralized SEO helper. Builds absolute Open Graph / Twitter tags per page.
 // Canonical/hreflang/og:locale are handled automatically by @nuxtjs/i18n (addSeoAttributes).
-export const SITE_URL = 'https://www.oasistripturismo.com'
+export const SITE_URL = 'https://oasis-trip-cyan.vercel.app'
 
 export function usePageSeo(opts: { title: string; description: string; image?: string }) {
   const route = useRoute()

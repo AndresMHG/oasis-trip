@@ -1,4 +1,4 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://www.oasistripturismo.com/sitemap.xml
+Sitemap: https://oasis-trip-cyan.vercel.app/sitemap.xml

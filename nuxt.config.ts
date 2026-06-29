@@ -28,7 +28,7 @@ export default defineNuxtConfig({
     ],
     lazy: true,
     langDir: 'locales',
-    baseUrl: 'https://www.oasistripturismo.com'
+    baseUrl: 'https://oasis-trip-cyan.vercel.app'
   },
 
   app: {
