@@ -4,8 +4,8 @@
 
 <script setup lang="ts">
 const { t } = useI18n()
-useHead({
-  title: () => `${t('audience.colombia.title')} · Oasis Trip`,
-  meta: [{ name: 'description', content: t('audience.colombia.subtitle') }]
+usePageSeo({
+  title: `${t('audience.colombia.title')} · Oasis Trip`,
+  description: t('audience.colombia.subtitle')
 })
 </script>

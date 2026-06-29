@@ -234,9 +234,9 @@ const audiences = computed(() => [
   { who: 'brasil', flag: '🇧🇷', accent: '#1E8449', title: t('audience.brasil.title'), sub: t('audience.brasil.subtitle') }
 ])
 
-useHead({
-  title: 'Oasis Trip · Turismo y Viajes',
-  meta: [{ name: 'description', content: t('footer.tagline') }]
+usePageSeo({
+  title: 'Oasis Trip · Turismo y Viajes | Brasil, Venezuela y Colombia',
+  description: t('footer.tagline')
 })
 </script>
 

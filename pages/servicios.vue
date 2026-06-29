@@ -54,7 +54,7 @@
 const { t, tm, rt } = useI18n()
 const services = computed(() => (tm('services.items') as any[]).map((s) => ({ icon: rt(s.icon), title: rt(s.title), desc: rt(s.desc) })))
 const airDest = computed(() => (tm('connections.air.destinations') as any[]).map((d) => rt(d)))
-useHead({ title: () => `${t('services.title')} · Oasis Trip` })
+usePageSeo({ title: `${t('services.title')} · Oasis Trip`, description: t('services.lead') })
 </script>
 
 <style scoped>

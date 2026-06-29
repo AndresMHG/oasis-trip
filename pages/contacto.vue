@@ -81,7 +81,7 @@ const send = () => {
   window.open(waLink(lines.join('\n')), '_blank', 'noopener')
 }
 
-useHead({ title: () => `${t('contact.title')} · Oasis Trip` })
+usePageSeo({ title: `${t('contact.title')} · Oasis Trip`, description: t('contact.lead') })
 </script>
 
 <style scoped>
