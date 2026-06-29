@@ -1,0 +1,216 @@
+{
+  "lang": { "es": "Español", "pt": "Português", "en": "English" },
+  "nav": {
+    "home": "Início",
+    "services": "Serviços",
+    "routes": "Rotas",
+    "venezuela": "Venezuela",
+    "colombia": "Colômbia",
+    "brasil": "Brasil",
+    "contact": "Contato",
+    "quote": "Cotar viagem",
+    "audiences": "Seu país"
+  },
+  "hero": {
+    "eyebrow": "Agência de viagens · Conexões internacionais",
+    "title": "Conectando Brasil, Venezuela e o mundo através de viagens seguras e personalizadas.",
+    "subtitle": "Atendimento especializado em passagens aéreas, rotas internacionais e pacotes sob medida. Acompanhamos você antes, durante e depois da viagem.",
+    "ctaWhatsapp": "Falar no WhatsApp",
+    "ctaQuote": "Cotar minha viagem",
+    "stats": [
+      { "value": "Brasil ↔ Venezuela", "label": "Rota especializada" },
+      { "value": "10+", "label": "Países de origem" },
+      { "value": "100%", "label": "Atendimento personalizado" }
+    ]
+  },
+  "trust": {
+    "title": "Mais que uma agência de viagens, conectamos pessoas, famílias e destinos.",
+    "items": [
+      "Atendimento humano, personalizado e direto",
+      "Especialistas em rotas Brasil ↔ Venezuela",
+      "Melhores combinações de preço, tempo e rota",
+      "Atendimento em português e espanhol"
+    ]
+  },
+  "about": {
+    "eyebrow": "Nossa história",
+    "title": "A Oasis Trip nasceu de uma necessidade real.",
+    "p1": "Durante anos, amigos, familiares e conhecidos sempre nos procuravam para conseguir os melhores preços em passagens, especialmente na rota entre o Brasil e a Venezuela.",
+    "p2": "Com o tempo entendemos que muitas pessoas precisavam de muito mais que um bilhete: precisavam de orientação, confiança e alguém que realmente conhecesse as rotas, a documentação e as melhores opções para viajar.",
+    "p3": "Assim nasceu a Oasis Trip. Hoje ajudamos viajantes de toda a América Latina a se conectarem com seus destinos de forma segura, personalizada e com atendimento humano."
+  },
+  "services": {
+    "eyebrow": "O que oferecemos?",
+    "title": "Soluções completas para cada viajante",
+    "lead": "Da emissão da passagem ao último detalhe do itinerário, cuidamos de tudo.",
+    "items": [
+      { "icon": "plane", "title": "Venda de passagens aéreas", "desc": "Buscamos as melhores tarifas entre centenas de opções, em voos nacionais e internacionais." },
+      { "icon": "route", "title": "Conexões internacionais", "desc": "Organizamos conexões entre Brasil, Venezuela e qualquer destino, com a melhor combinação de rota e horários." },
+      { "icon": "package", "title": "Pacotes personalizados", "desc": "Criamos viagens conforme seu orçamento, datas, preferências e número de viajantes." },
+      { "icon": "bed", "title": "Reservas e hospedagem", "desc": "Cuidamos de hotéis, resorts, traslados, aluguel de veículos e seguro viagem." },
+      { "icon": "shield", "title": "Atendimento especializado", "desc": "Tiramos dúvidas sobre conexões, bagagem, documentação, requisitos migratórios e escalas." },
+      { "icon": "chat", "title": "Suporte no WhatsApp", "desc": "Comunicação rápida e acompanhamento real em cada etapa do processo." }
+    ]
+  },
+  "connections": {
+    "eyebrow": "Conexões internacionais",
+    "title": "Especialistas na rota Brasil – Venezuela",
+    "lead": "Facilitamos a conexão entre os dois países com opções aéreas e terrestres, adaptadas às necessidades de cada passageiro. Planejamos todo o itinerário e acompanhamos você do início ao fim.",
+    "air": {
+      "title": "Conexão aérea",
+      "desc": "Organizamos sua viagem desde qualquer cidade do Brasil até Boa Vista (RR) e coordenamos a continuação da rota aérea para a Venezuela.",
+      "destinationsLabel": "Destinos disponíveis:",
+      "destinations": ["Puerto Ordaz", "Caracas", "Porlamar (Ilha de Margarita)"],
+      "note": "Também organizamos o trajeto no sentido contrário, da Venezuela para qualquer cidade do Brasil."
+    },
+    "land": {
+      "title": "Conexão terrestre",
+      "desc": "Para quem prefere viajar de carro/ônibus, organizamos o itinerário desde qualquer cidade do Brasil até Boa Vista, onde conectamos com empresas e motoristas parceiros que realizam o traslado para diferentes destinos na Venezuela de forma segura e confiável.",
+      "note": "Da mesma forma, coordenamos a viagem da Venezuela até Boa Vista para continuar a qualquer cidade do Brasil."
+    },
+    "disclaimer": "Importante: a Oasis Trip coordena e organiza o itinerário de viagem. Os traslados terrestres são realizados por empresas e transportadores parceiros de confiança."
+  },
+  "routes": {
+    "eyebrow": "Rotas mais procuradas",
+    "title": "Alguns dos trajetos que mais coordenamos",
+    "lead": "E muitos outros. Se não encontrar sua rota, fale com a gente: montamos sob medida.",
+    "list": [
+      "São Paulo → Boa Vista",
+      "São Paulo → Caracas",
+      "Curitiba → Boa Vista",
+      "Curitiba → Manaus",
+      "Boa Vista → Puerto Ordaz",
+      "Puerto Ordaz → Boa Vista",
+      "Bogotá → São Paulo",
+      "Bogotá → Curitiba",
+      "São Paulo → Bogotá",
+      "Rio de Janeiro → Bogotá",
+      "Curitiba → Rio de Janeiro",
+      "Florianópolis → Boa Vista"
+    ]
+  },
+  "from": {
+    "eyebrow": "Viaje de qualquer cidade",
+    "title": "Não importa onde você esteja",
+    "lead": "Podemos ajudar se você viaja de:",
+    "countries": ["Brasil", "Venezuela", "Colômbia", "Peru", "Chile", "Argentina", "Equador", "México", "Estados Unidos", "Europa"],
+    "note": "ou qualquer outro destino internacional."
+  },
+  "why": {
+    "eyebrow": "Por que escolher a Oasis Trip?",
+    "title": "A tranquilidade de viajar bem acompanhado",
+    "items": [
+      "Atendimento personalizado",
+      "Comunicação rápida pelo WhatsApp",
+      "Acompanhamento durante todo o processo",
+      "Rotas especializadas Brasil – Venezuela",
+      "Opções adaptadas ao seu orçamento",
+      "Transparência e segurança",
+      "Experiência atendendo viajantes latino-americanos",
+      "Suporte antes, durante e depois da viagem"
+    ]
+  },
+  "commitment": {
+    "eyebrow": "Nosso compromisso",
+    "title": "Cada viagem é importante",
+    "p1": "Não trabalhamos apenas com reservas; trabalhamos com histórias, reencontros familiares, férias dos sonhos e novas oportunidades.",
+    "p2": "Analisamos as opções disponíveis e recomendamos a alternativa mais conveniente, sempre priorizando a segurança, o conforto e o melhor custo-benefício."
+  },
+  "cta": {
+    "title": "Pronto para planejar sua próxima viagem?",
+    "text": "Conte para onde quer ir e enviamos as melhores opções pelo WhatsApp.",
+    "button": "Cotar minha viagem agora"
+  },
+  "contact": {
+    "eyebrow": "Contato",
+    "title": "Vamos falar sobre sua viagem",
+    "lead": "Preencha alguns dados ou fale direto pelo WhatsApp. Atendemos em português e espanhol.",
+    "whatsappLabel": "WhatsApp",
+    "emailLabel": "E-mail",
+    "instagramLabel": "Instagram",
+    "form": {
+      "name": "Nome",
+      "namePh": "Seu nome",
+      "contactField": "WhatsApp ou e-mail",
+      "contactPh": "Para responder você",
+      "origin": "Origem",
+      "originPh": "Cidade de saída",
+      "destination": "Destino",
+      "destinationPh": "Para onde você viaja?",
+      "message": "Mensagem",
+      "messagePh": "Datas, número de viajantes, detalhes...",
+      "submit": "Enviar pelo WhatsApp"
+    }
+  },
+  "footer": {
+    "tagline": "Agência de viagens especializada em conexões internacionais entre Brasil, Venezuela e Colômbia, com atendimento humano e personalizado.",
+    "navTitle": "Navegação",
+    "audienceTitle": "Atendimento por país",
+    "contactTitle": "Contato",
+    "rights": "Todos os direitos reservados.",
+    "disclaimer": "A Oasis Trip coordena e organiza itinerários de viagem. Os traslados terrestres são realizados por empresas e transportadores parceiros de confiança."
+  },
+  "whatsapp": {
+    "float": "Fale conosco",
+    "message": "Olá Oasis Trip! Gostaria de cotar uma viagem."
+  },
+  "audience": {
+    "venezuela": {
+      "badge": "Atendimento para a Venezuela",
+      "title": "Conectamos a Venezuela com o Brasil e o mundo",
+      "subtitle": "Especialistas na rota Brasil ↔ Venezuela. Coordenamos sua viagem aérea e terrestre com segurança, bons preços e acompanhamento real.",
+      "whatsappMsg": "Olá Oasis Trip! Sou da Venezuela e quero cotar uma viagem.",
+      "introTitle": "Sua viagem de ou para a Venezuela, resolvida",
+      "introText": "Organizamos a rota completa entre qualquer cidade do Brasil e a Venezuela. Coordenamos voos até Boa Vista (RR) e a continuação para Puerto Ordaz, Caracas ou Porlamar, além de conexões terrestres seguras com transportadores parceiros.",
+      "featuresTitle": "Como ajudamos você",
+      "features": [
+        { "title": "Conexão aérea", "desc": "De qualquer cidade do Brasil até Boa Vista e continuação aérea para Puerto Ordaz, Caracas ou Porlamar." },
+        { "title": "Conexão terrestre", "desc": "Itinerário até Boa Vista e traslado com empresas e motoristas parceiros de confiança para a Venezuela." },
+        { "title": "Ida e volta", "desc": "Coordenamos também o trajeto da Venezuela para qualquer cidade do Brasil." },
+        { "title": "Documentação e dúvidas", "desc": "Orientamos sobre bagagem, escalas, requisitos migratórios e a melhor combinação de rota." }
+      ],
+      "routesTitle": "Rotas frequentes para venezuelanos",
+      "routes": ["São Paulo → Caracas", "Boa Vista → Puerto Ordaz", "Puerto Ordaz → Boa Vista", "São Paulo → Boa Vista", "Curitiba → Boa Vista"],
+      "ctaTitle": "Vai viajar de ou para a Venezuela?",
+      "ctaText": "Fale com a gente no WhatsApp e montamos a melhor rota."
+    },
+    "colombia": {
+      "badge": "Atendimento para a Colômbia",
+      "title": "Sua ponte entre a Colômbia e o Brasil",
+      "subtitle": "Coordenamos rotas entre as principais cidades da Colômbia e do Brasil, com as melhores combinações de preço, tempo e conexão.",
+      "whatsappMsg": "Olá Oasis Trip! Sou da Colômbia e quero cotar uma viagem.",
+      "introTitle": "Conectando a Colômbia com a América do Sul",
+      "introText": "De Bogotá e outras cidades colombianas organizamos sua viagem para São Paulo, Curitiba, Rio de Janeiro e mais, com assessoria personalizada em cada etapa e suporte antes, durante e depois da viagem.",
+      "featuresTitle": "Como ajudamos você",
+      "features": [
+        { "title": "Voos internacionais", "desc": "As melhores tarifas entre a Colômbia e o Brasil entre centenas de opções." },
+        { "title": "Rotas e conexões", "desc": "Planejamos o itinerário completo com a melhor combinação de horários e escalas." },
+        { "title": "Pacotes sob medida", "desc": "Férias, turismo, viagens em família ou de negócios pensados para você." },
+        { "title": "Acompanhamento total", "desc": "Tiramos dúvidas de bagagem, documentação e requisitos de viagem." }
+      ],
+      "routesTitle": "Rotas frequentes para colombianos",
+      "routes": ["Bogotá → São Paulo", "Bogotá → Curitiba", "São Paulo → Bogotá", "Rio de Janeiro → Bogotá", "Curitiba → Bogotá"],
+      "ctaTitle": "Vai viajar de ou para a Colômbia?",
+      "ctaText": "Conte seu plano e enviamos as melhores opções pelo WhatsApp."
+    },
+    "brasil": {
+      "badge": "Atendimento para o Brasil",
+      "title": "Do Brasil para a Venezuela, a Colômbia e o mundo",
+      "subtitle": "Somos especialistas em conectar qualquer cidade do Brasil com a Venezuela, a Colômbia e destinos internacionais, com atendimento em português.",
+      "whatsappMsg": "Olá Oasis Trip! Sou do Brasil e gostaria de cotar uma viagem.",
+      "introTitle": "Sua viagem a partir do Brasil, resolvida",
+      "introText": "Organizamos passagens aéreas e conexões a partir de São Paulo, Curitiba, Rio de Janeiro, Florianópolis e outras cidades, com as melhores combinações de preço, tempo e rota — incluindo a rota especializada Brasil ↔ Venezuela.",
+      "featuresTitle": "Como ajudamos você",
+      "features": [
+        { "title": "Passagens aéreas", "desc": "Buscamos as melhores tarifas em voos nacionais e internacionais." },
+        { "title": "Conexão Brasil ↔ Venezuela", "desc": "Rota aérea e terrestre via Boa Vista (RR) com acompanhamento completo." },
+        { "title": "Pacotes personalizados", "desc": "Viagens sob medida conforme seu orçamento, datas e preferências." },
+        { "title": "Suporte em português", "desc": "Atendimento humano e rápido pelo WhatsApp em todas as etapas." }
+      ],
+      "routesTitle": "Rotas mais procuradas no Brasil",
+      "routes": ["São Paulo → Boa Vista", "São Paulo → Caracas", "Curitiba → Manaus", "Florianópolis → Boa Vista", "Rio de Janeiro → Bogotá"],
+      "ctaTitle": "Vai viajar a partir do Brasil?",
+      "ctaText": "Fale com a gente no WhatsApp e montamos a melhor rota para você."
+    }
+  }
+}
