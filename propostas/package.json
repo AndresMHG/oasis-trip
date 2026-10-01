@@ -1,0 +1,26 @@
+{
+  "name": "oasis-trip-propostas",
+  "private": true,
+  "type": "module",
+  "engines": {
+    "node": ">=20"
+  },
+  "scripts": {
+    "build": "nuxt build",
+    "dev": "nuxt dev --port 3001",
+    "preview": "nuxt preview",
+    "postinstall": "nuxt prepare"
+  },
+  "dependencies": {
+    "@neondatabase/serverless": "^1.2.0",
+    "@upstash/redis": "^1.34.0",
+    "nuxt": "3.13.2",
+    "unstorage": "^1.12.0",
+    "vue": "^3.5.12",
+    "vue-router": "^4.4.5"
+  },
+  "overrides": {
+    "unhead": "^1.11.0",
+    "@unhead/vue": "^1.11.0"
+  }
+}
