@@ -47,14 +47,8 @@
             <strong>{{ legName(i) }}</strong>
             <span>{{ [f.airline, fmtShort(f.date)].filter(Boolean).join(' · ') }}</span>
           </div>
-          <div class="flight__route">
-            <div><b>{{ f.departTime || '--:--' }}</b><small>{{ f.origin }}</small></div>
-            <span class="flight__line"><Icon name="plane" :size="16" /><small v-if="f.duration">{{ f.duration }}</small></span>
-            <div class="r"><b>{{ f.arriveTime || '--:--' }}</b><small>{{ f.destination }}</small></div>
-          </div>
-          <p v-if="f.connections?.length" class="flight__conn">
-            {{ t.connection }}: {{ f.connections.map((c) => [c.airport, c.arrive && c.depart ? `${c.arrive}–${c.depart}` : ''].filter(Boolean).join(' ')).join(' · ') }}
-          </p>
+          <FlightTimeline :flight="f" :lang="lang" />
+          <p v-if="f.duration" class="muted small"><Icon name="clock" :size="14" /> {{ f.duration }}</p>
           <p v-if="f.baggage" class="muted small"><Icon name="luggage" :size="14" /> {{ v(f.baggage) }}</p>
         </article>
       </section>

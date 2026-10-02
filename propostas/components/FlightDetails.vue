@@ -1,23 +1,5 @@
 <template>
   <div class="fd">
-    <!-- Trajeto com as conexões e o tempo de espera em cada uma -->
-    <ol v-if="flight.connections?.length" class="fd__route">
-      <li class="fd__stop">
-        <strong>{{ flight.departTime || '—' }}</strong>
-        <span>{{ t.departsFrom }} {{ flight.origin }}</span>
-      </li>
-      <li v-for="c in flight.connections" :key="c.id" class="fd__conn">
-        <span class="fd__conn-title"><Icon name="clock" :size="14" /> {{ t.connectionIn }} {{ c.airport }}</span>
-        <small>
-          {{ [c.arrive && `${t.arrives} ${c.arrive}`, c.depart && `${t.departs} ${c.depart}`].filter(Boolean).join(' · ') }}
-          <b v-if="layoverMinutes(c.arrive, c.depart)"> · {{ fmtMinutes(layoverMinutes(c.arrive, c.depart)) }} {{ t.ofWait }}</b>
-        </small>
-      </li>
-      <li class="fd__stop">
-        <strong>{{ flight.arriveTime || '—' }}</strong>
-        <span>{{ t.arrivesAt }} {{ flight.destination }}</span>
-      </li>
-    </ol>
 
     <!-- Tarifa deste voo, em poucas linhas -->
     <div v-if="fare" class="fd__fare">

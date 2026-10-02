@@ -441,6 +441,13 @@ export const LEGS = ['Ida', 'Volta', 'Trecho 3', 'Trecho 4']
 export const legOf = (f: Flight, i: number, count: number) =>
   f.leg || (count === 1 ? 'Ida' : count === 2 ? (i === 0 ? 'Ida' : 'Volta') : `Trecho ${i + 1}`)
 
+/** O voo chega num dia seguinte? (algum horário "volta" ao passar da meia-noite) */
+export const flightNextDay = (f: Pick<Flight, 'departTime' | 'arriveTime' | 'connections'>) => {
+  const m = (s: string) => { const [h, mi] = (s || '').split(':').map(Number); return Number.isFinite(h) && Number.isFinite(mi) ? h * 60 + mi : NaN }
+  const seq = [f.departTime, ...(f.connections || []).flatMap((c) => [c.arrive, c.depart]), f.arriveTime].map(m).filter((x) => !Number.isNaN(x))
+  return seq.some((x, i) => i > 0 && x < seq[i - 1])
+}
+
 /** Tempo de espera entre chegada e saída (atravessa a meia-noite se preciso), em minutos */
 export const layoverMinutes = (arrive: string, depart: string) => {
   const m = (s: string) => {

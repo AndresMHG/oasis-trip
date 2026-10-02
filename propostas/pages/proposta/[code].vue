@@ -140,18 +140,15 @@
                 <i><Icon name="plane" :size="16" /></i>
                 <small>{{ e.item.connections?.length ? t.connectionsN(e.item.connections.length) : v(e.item.stops) }}</small>
               </div>
-              <div class="r"><strong>{{ e.item.arriveTime || '—' }}</strong><span>{{ e.item.destination }}</span></div>
+              <div class="r"><strong>{{ e.item.arriveTime || '—' }}<sup v-if="flightNextDay(e.item)" class="nd">{{ t.tlNextDay }}</sup></strong><span>{{ e.item.destination }}</span></div>
             </div>
-            <!-- Resumo curto das conexões (os horários completos ficam em "Ver detalhes") -->
-            <p v-if="e.item.connections?.length" class="flight__conn">
-              <Icon name="clock" :size="14" />
-              <span>{{ e.item.connections.map((c) => [c.airport, fmtMinutes(layoverMinutes(c.arrive, c.depart))].filter(Boolean).join(' · ')).join(' | ') }}</span>
-            </p>
+            <!-- Conexões: linha do tempo sempre visível, com a espera entre os voos destacada -->
+            <FlightTimeline v-if="e.item.connections?.some((c) => c.airport)" :flight="e.item" :lang="lang" class="flight__tl" />
             <div v-if="e.item.baggage || e.item.price" class="flight__foot">
               <span v-if="e.item.baggage"><Icon name="luggage" :size="15" /> {{ v(e.item.baggage) }}</span>
               <span v-if="e.item.price" class="price">{{ money(e.item.price, p.currency, lang) }}<small class="tax-inc">{{ t.taxesIncluded }}</small></span>
             </div>
-            <Expand v-if="e.item.notes || e.item.fare || e.item.connections?.length" :more="t.seeMore" :less="t.seeLess" @click.stop>
+            <Expand v-if="e.item.notes || e.item.fare" :more="t.seeMore" :less="t.seeLess" @click.stop>
               <FlightDetails :flight="e.item" :t="t" :currency="p.currency" :lang="lang" />
             </Expand>
             <span v-if="isMix" class="pick__radio"><Icon v-if="e.selected" name="check" :size="14" :stroke="3" /></span>
@@ -392,7 +389,7 @@
 
 <script setup lang="ts">
 import {
-  MIX_ID, durationMinutes, fmtMinutes, layoverMinutes, legOf, mixBase, mixCatalog, mixDefault, mixTotals, money, nightsBetween,
+  MIX_ID, durationMinutes, flightNextDay, fmtMinutes, layoverMinutes, legOf, mixBase, mixCatalog, mixDefault, mixTotals, money, nightsBetween,
   optionTotals, paymentValues, waUrl,
   type Flight, type Hotel, type Kind, type MixSelection, type Payment, type Proposal, type Tour, type Transfer
 } from '~/utils/proposal'
@@ -948,6 +945,8 @@ useSeoMeta({
 .tax-inc { font-size: .7rem; font-weight: 500; color: var(--c-gray); }
 
 /* Conexões no card do voo */
+.flight__tl { background: var(--c-bg-soft); border-radius: 14px; padding: 12px 12px 10px 4px; }
+.nd { font-size: .62rem; font-weight: 700; color: #b45309; margin-left: 3px; vertical-align: super; font-family: var(--ff-body, inherit); }
 .flight__conn { display: flex; gap: 6px; align-items: flex-start; margin: -4px 0 0; font-size: .82rem; color: #8a4b12; background: #fff7ef; border-radius: 10px; padding: 7px 10px; }
 .flight__conn svg { flex: none; margin-top: 2px; }
 

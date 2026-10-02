@@ -9,6 +9,7 @@
       </span>
       <button type="button" class="btn btn--ghost btn--icon btn--sm btn--danger" title="Remover conexão" @click="model = list.filter((_, j) => j !== i)"><Icon name="trash" :size="15" /></button>
     </div>
+    <p v-if="!list.length" class="cx__hint">💡 Voo com escala? Adicione a conexão com os horários de chegada e saída — o cliente vê a linha do tempo com a espera destacada.</p>
     <button type="button" class="btn btn--sm cx__add" @click="add"><Icon name="plus" :size="15" /> Adicionar conexão</button>
   </div>
 </template>
@@ -31,4 +32,5 @@ const add = () => (model.value = [...list.value, { id: uid(), airport: '', arriv
   .cx__row { grid-template-columns: 1fr 1fr; }
   .cx__row .field:first-child { grid-column: span 2; }
 }
+.cx__hint { margin: 0; font-size: .82rem; color: #8a4b12; background: #fff7ef; border-radius: 8px; padding: 6px 10px; }
 </style>
