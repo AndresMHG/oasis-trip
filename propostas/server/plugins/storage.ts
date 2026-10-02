@@ -8,7 +8,8 @@ import neonDriver from '../lib/neonDriver'
 // - Sem nada configurado → arquivos JSON em ./.data/db (uso no computador).
 export default defineNitroPlugin(() => {
   const storage = useStorage()
-  const pg = process.env.DATABASE_URL || process.env.POSTGRES_URL
+  // A Vercel pode criar o nome com prefixo (DATABASE_POSTGRES_URL, STORAGE_URL…) conforme a configuração do Neon
+  const pg = process.env.DATABASE_URL || process.env.POSTGRES_URL || process.env.DATABASE_POSTGRES_URL || process.env.STORAGE_URL || process.env.STORAGE_POSTGRES_URL
   const kvUrl = process.env.KV_REST_API_URL || process.env.UPSTASH_REDIS_REST_URL
   const kvToken = process.env.KV_REST_API_TOKEN || process.env.UPSTASH_REDIS_REST_TOKEN
 
