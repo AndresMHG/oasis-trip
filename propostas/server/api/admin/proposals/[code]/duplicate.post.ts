@@ -18,6 +18,7 @@ export default defineEventHandler(async (event) => {
     reservedOptionId: undefined,
     reservedMix: undefined,
     review: undefined,
+    trip: undefined,
     activity: [{ type: 'criado', at: now, detail: `Duplicada de ${src.code}` }]
   }
   while (await getProposal(copy.code)) copy.code = newCode()

@@ -28,6 +28,8 @@ export default defineEventHandler(async (event) => {
     // "Monte do seu jeito" precisa dos preços de cada item e de 2+ opções para combinar
     allowMix: p.allowMix !== false && p.showItemPrices && p.options.length > 1 && mixWorthIt(mixCatalog(p.options.map(migrateOptionFare))),
     reviewOpen: tripFinished(p) && !p.review,
+    // Só avisa que existe um guia; o conteúdo exige o PIN (POST /api/p/CODE/trip)
+    tripGuide: !!p.trip?.enabled,
     options: p.options.map((raw) => {
       const o = migrateOptionFare(raw) // tarifa antiga da opção → em cada voo
       const totals = optionTotals(o)

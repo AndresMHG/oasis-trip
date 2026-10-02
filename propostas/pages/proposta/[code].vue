@@ -25,6 +25,15 @@
     </nav>
 
     <main class="wrap body">
+      <NuxtLink v-if="p.tripGuide" :to="`/viagem/${p.code}`" class="tgb">
+        <span class="tgb__ico"><Icon name="luggage" :size="24" /></span>
+        <span class="tgb__txt">
+          <strong>{{ lang === 'es' ? '¡Tu viaje está confirmado!' : 'Sua viagem está confirmada!' }}</strong>
+          <span>{{ lang === 'es' ? 'Pasajes, códigos QR, vouchers y todo para viajar tranquilo.' : 'Passagens, QR codes, vouchers e tudo para viajar tranquilo.' }}</span>
+        </span>
+        <span class="btn btn--accent">{{ lang === 'es' ? 'Mi viaje' : 'Minha viagem' }}</span>
+      </NuxtLink>
+
       <NuxtLink v-if="p.reviewOpen" :to="`/avaliacao/${p.code}`" class="rvb">
         <span class="rvb__stars">★★★★★</span>
         <strong>{{ t.rvBannerTitle }}</strong>
@@ -393,6 +402,7 @@ type PublicOption = Pick<Proposal['options'][number], 'id' | 'name' | 'highlight
 }
 type PublicProposal = Pick<Proposal, 'code' | 'status' | 'validUntil' | 'currency' | 'destination' | 'intro' | 'itinerary' | 'conditions' | 'reservedOptionId' | 'showItemPrices'> & {
   reviewOpen: boolean
+  tripGuide?: boolean
   allowMix: boolean
   reservedMix: MixSelection | null
   client: Pick<Proposal['client'], 'name' | 'lang' | 'travelers'>
@@ -700,6 +710,14 @@ useSeoMeta({
 .muted { color: var(--c-gray); }
 
 /* Hero */
+.tgb {
+  display: flex; align-items: center; gap: 12px; flex-wrap: wrap; padding: 16px; border-radius: 18px;
+  background: linear-gradient(135deg, #0F3D57, #2E8BB0); color: #fff; box-shadow: 0 12px 30px rgba(15,61,87,.25);
+}
+.tgb__ico { width: 46px; height: 46px; border-radius: 14px; display: grid; place-items: center; background: rgba(255,255,255,.15); flex: none; }
+.tgb__txt { flex: 1; min-width: 180px; display: grid; gap: 2px; }
+.tgb__txt strong { font-family: var(--ff-head); font-size: 1.05rem; }
+.tgb__txt span { font-size: .88rem; opacity: .9; }
 .hero {
   position: relative; min-height: 88svh; display: flex; flex-direction: column; justify-content: flex-end;
   background: linear-gradient(135deg, #0F3D57, #2E8BB0) center/cover no-repeat; color: #fff; overflow: hidden;

@@ -1,5 +1,5 @@
 // Restaura um backup gerado em "Exportar tudo". Só aceita os tipos de dado do próprio app.
-const ALLOWED = /^(proposals:[A-Z0-9]+|templates:[a-z0-9]+|images:[a-z0-9]+|settings)$/i
+const ALLOWED = /^(proposals:[A-Z0-9]+|templates:[a-z0-9]+|images:[a-z0-9]+|files:[a-z0-9]+|settings)$/i
 
 export default defineEventHandler(async (event) => {
   const body = await readBody<{ app?: string; data?: Record<string, unknown> }>(event)

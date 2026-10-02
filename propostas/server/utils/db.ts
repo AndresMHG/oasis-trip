@@ -106,3 +106,10 @@ export const images = {
   get: (id: string) => db().getItem<string>(`images:${id.replace(/[^a-z0-9]/gi, '')}`),
   set: (id: string, dataUrl: string) => db().setItem(`images:${id}`, dataUrl)
 }
+
+/** Arquivos do guia da viagem (PDF/imagem em data URL) — só saem com o PIN do cliente */
+export const files = {
+  get: (id: string) => db().getItem<string>(`files:${id.replace(/[^a-z0-9]/gi, '')}`),
+  set: (id: string, dataUrl: string) => db().setItem(`files:${id}`, dataUrl),
+  remove: (id: string) => db().removeItem(`files:${id.replace(/[^a-z0-9]/gi, '')}`)
+}

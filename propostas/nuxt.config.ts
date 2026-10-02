@@ -24,6 +24,7 @@ export default defineNuxtConfig({
     // Proposta pública nunca deve ser indexada
     '/proposta/**': { headers: { 'X-Robots-Tag': 'noindex, nofollow' } },
     '/avaliacao/**': { headers: { 'X-Robots-Tag': 'noindex, nofollow' } },
+    '/viagem/**': { ssr: false, headers: { 'X-Robots-Tag': 'noindex, nofollow' } },
     '/admin/**': { ssr: false },
     '/login': { ssr: false }
   },

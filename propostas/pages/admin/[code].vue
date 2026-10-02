@@ -165,6 +165,12 @@
         </EditorSection>
 
         <!-- Condições -->
+        <EditorSection v-if="p.trip" title="Guia da viagem (depois de confirmar)" icon="luggage" id="guia"
+          :summary="p.trip.enabled ? `Liberado · código ${p.trip.pin} · ${countLabel(p.trip.docs.length, 'documento', 'documentos')}` : 'Passagens, QR, vouchers e checklist para o cliente'"
+          :start-open="p.status === 'aceito' || p.trip.enabled">
+          <TripGuideEditor v-model="p.trip" :code="p.code" :confirmed="p.status === 'aceito'" @send="sendTrip" />
+        </EditorSection>
+
         <EditorSection title="Condições, validade e exibição" icon="shield">
           <div class="grid-form">
             <label class="field c4">
@@ -260,7 +266,7 @@ import { countryOf } from '~/utils/cities'
 import { optionNameFor } from '~/composables/useProposalText'
 import {
   AIRLINES, BAGGAGE, BOARDS, LEGS, STATUS, STOPS, VEHICLES,
-  migrateOptionFare, money, paymentValues, newDay, newFlight, newHotel, newOption, newTour, newTransfer, nightsBetween, optionTotals, tripFinished, uid,
+  migrateOptionFare, money, paymentValues, newDay, newTripGuide, newFlight, newHotel, newOption, newTour, newTransfer, nightsBetween, optionTotals, tripFinished, uid,
   type Flight, type Hotel, type Proposal, type Settings
 } from '~/utils/proposal'
 
@@ -289,6 +295,7 @@ onMounted(async () => {
   // Tarifa agora é por voo: converte propostas que tinham a tarifa na opção
   prop.options = prop.options.map((o) => migrateOptionFare(o))
   prop.payment ??= { ...s.payment }
+  prop.trip ??= newTripGuide(prop.client.lang)
   p.value = prop
   await nextTick()
   save.value = 'saved'
@@ -353,6 +360,20 @@ watch(
     }
   }
 )
+
+/* ---------- Guia da viagem: envia link + código pelo WhatsApp ---------- */
+const sendTrip = async () => {
+  await persist()
+  const P = p.value!
+  const first = (P.client.name || '').trim().split(' ')[0]
+  const url = `${window.location.origin}/viagem/${P.code}`
+  const city = P.destination.city.replace(/\s*\([A-Z]{3}\)\s*$/, '')
+  const msg = P.client.lang === 'es'
+    ? `¡Hola${first ? ' ' + first : ''}! ✈️ Tu viaje${city ? ' a ' + city : ''} está confirmado.\n\nAquí está tu guía con los pasajes, códigos QR, vouchers y todo lo que necesitas:\n${url}\n\nCódigo de acceso: *${P.trip!.pin}*\n\n¡Cualquier duda, estamos aquí! 💛`
+    : `Olá${first ? ' ' + first : ''}! ✈️ Sua viagem${city ? ' para ' + city : ''} está confirmada.\n\nAqui está o seu guia com as passagens, QR codes, vouchers e tudo o que você precisa:\n${url}\n\nCódigo de acesso: *${P.trip!.pin}*\n\nQualquer dúvida, estamos aqui! 💛`
+  const phone = (P.client.whatsapp || '').replace(/\D/g, '')
+  window.open(phone ? `https://wa.me/${phone}?text=${encodeURIComponent(msg)}` : `https://wa.me/?text=${encodeURIComponent(msg)}`, '_blank')
+}
 
 /* ---------- Colar cotação: texto copiado → voos preenchidos ---------- */
 const pasteOpen = ref(false)

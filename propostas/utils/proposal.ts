@@ -263,8 +263,50 @@ export interface Proposal {
   /** Itens escolhidos quando o cliente reservou a combinação "Monte do seu jeito" */
   reservedMix?: MixSelection
   review?: Review
+  /** Guia da viagem: liberado depois da confirmação, protegido por PIN */
+  trip?: TripGuide
   activity: Activity[]
 }
+
+/* ---------- Guia da viagem (pós-confirmação) ---------- */
+export type TripDocKind = 'passagem' | 'embarque' | 'voucher' | 'seguro' | 'outro'
+export const TRIP_DOC_KINDS: Record<TripDocKind, { pt: string; es: string; icon: string }> = {
+  passagem: { pt: 'Passagem / e-ticket', es: 'Pasaje / e-ticket', icon: 'plane' },
+  embarque: { pt: 'Cartão de embarque (QR)', es: 'Tarjeta de embarque (QR)', icon: 'plane' },
+  voucher: { pt: 'Voucher (hotel, passeio, transfer)', es: 'Voucher (hotel, paseo, traslado)', icon: 'file' },
+  seguro: { pt: 'Seguro viagem', es: 'Seguro de viaje', icon: 'shield' },
+  outro: { pt: 'Outro documento', es: 'Otro documento', icon: 'file' }
+}
+export interface TripDoc {
+  id: string
+  kind: TripDocKind
+  title: string
+  /** Localizador / código da reserva (PNR) */
+  pnr: string
+  /** Arquivo guardado no banco (PDF ou imagem) */
+  fileId: string
+  fileName: string
+  mime: string
+}
+export interface TripGuide {
+  enabled: boolean
+  /** Código de 4 dígitos que o cliente digita para abrir o guia */
+  pin: string
+  docs: TripDoc[]
+  /** Um item por linha */
+  checklist: string
+  insurance: string
+  contacts: string
+  notes: string
+}
+const TRIP_CHECKLIST: Record<Lang, string> = {
+  pt: 'Documento de identidade ou passaporte válido (confira a validade)\nCheck-in online (abre 24 a 48 h antes do voo)\nChegar ao aeroporto 3 h antes em voos internacionais (2 h nos nacionais)\nSeguro viagem impresso ou no celular\nVacinas e documentos exigidos pelo destino\nCartão internacional / dinheiro local\nCarregador e adaptador de tomada',
+  es: 'Documento de identidad o pasaporte vigente (revisa la fecha de vencimiento)\nCheck-in online (abre 24 a 48 h antes del vuelo)\nLlegar al aeropuerto 3 h antes en vuelos internacionales (2 h en nacionales)\nSeguro de viaje impreso o en el celular\nVacunas y documentos exigidos por el destino\nTarjeta internacional / dinero local\nCargador y adaptador de enchufe'
+}
+export const newTripPin = () => String(Math.floor(1000 + Math.random() * 9000))
+export const newTripGuide = (lang: Lang = 'pt'): TripGuide => ({
+  enabled: false, pin: newTripPin(), docs: [], checklist: TRIP_CHECKLIST[lang], insurance: '', contacts: '', notes: ''
+})
 
 export interface Settings {
   agentName: string
