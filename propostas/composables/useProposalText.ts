@@ -313,7 +313,7 @@ const values: Record<string, string> = {
 
 // Palavras dos nomes de opção sugeridos (ex.: "Opção 1 · Mais rápida" → "Opción 1 · Más rápida")
 const optionWords: [RegExp, string][] = [
-  [/\bOpção\b/g, 'Opción'], [/\bOpções\b/g, 'Opciones'], [/\bVoo direto\b/gi, 'Vuelo directo'], [/\bVoo\b/g, 'Vuelo'],
+[/\bSeu orçamento\b/g, 'Tu presupuesto'], [/\bOpção\b/g, 'Opción'], [/\bOpções\b/g, 'Opciones'], [/\bVoo direto\b/gi, 'Vuelo directo'], [/\bVoo\b/g, 'Vuelo'],
   [/\bMais econômica\b/gi, 'Más económica'], [/\bMais barata\b/gi, 'Más barata'], [/\bMais rápida\b/gi, 'Más rápida'],
   [/\bMais confortável\b/gi, 'Más cómoda'], [/\bEconômica\b/g, 'Económica'], [/\bEssencial\b/g, 'Esencial'],
   [/\bRecomendada\b/g, 'Recomendada'], [/\bsem escalas\b/gi, 'sin escalas'], [/\bcom bagagem\b/gi, 'con equipaje']

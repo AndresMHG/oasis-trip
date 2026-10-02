@@ -31,8 +31,24 @@ export interface BuiltinTemplate {
 export const BUILTIN_TEMPLATES: BuiltinTemplate[] = [
   { id: 'pacote', name: 'Pacote completo', description: 'Voos, hotel, passeios, transfers e roteiro', icon: 'package' },
   { id: 'aereo-ida-volta', name: 'Passagem aérea · ida e volta', description: '2 opções de voo com ida e volta', icon: 'plane' },
-  { id: 'aereo-ida', name: 'Passagem aérea · somente ida', description: '2 opções de voo só de ida', icon: 'plane' }
+  { id: 'aereo-ida', name: 'Passagem aérea · somente ida', description: '2 opções de voo só de ida', icon: 'plane' },
+  { id: 'direto-aereo', name: 'Orçamento direto · passagem', description: '1 opção só, sem escolher — ida e volta', icon: 'plane' },
+  { id: 'direto-pacote', name: 'Orçamento direto · pacote', description: '1 opção só, sem escolher — voo, hotel e passeios', icon: 'package' }
 ]
+
+/** Textos do orçamento direto (uma opção só: o cliente não escolhe, só confirma) */
+const DIRETO_TEXT = {
+  pt: {
+    aereo: 'Conforme conversamos, segue o orçamento da sua passagem com todos os detalhes: horários, conexões, bagagem e valores. ✈️\n\nEstá tudo certo? É só clicar em "Quero reservar" para garantirmos esta tarifa — os valores das companhias aéreas podem mudar até a emissão.',
+    pacote: 'Conforme conversamos, preparamos o orçamento da sua viagem com tudo o que está incluído: voos, hospedagem, passeios e traslados. 🌴\n\nEstá tudo certo? É só clicar em "Quero reservar" para confirmarmos — os valores estão sujeitos à disponibilidade no momento da reserva.',
+    option: 'Seu orçamento'
+  },
+  es: {
+    aereo: 'Como conversamos, aquí está el presupuesto de tu pasaje con todos los detalles: horarios, conexiones, equipaje y valores. ✈️\n\n¿Está todo bien? Solo haz clic en "Quiero reservar" para asegurar esta tarifa — los valores de las aerolíneas pueden cambiar hasta la emisión.',
+    pacote: 'Como conversamos, preparamos el presupuesto de tu viaje con todo lo que está incluido: vuelos, hospedaje, paseos y traslados. 🌴\n\n¿Está todo bien? Solo haz clic en "Quiero reservar" para confirmar — los valores están sujetos a disponibilidad al momento de la reserva.',
+    option: 'Tu presupuesto'
+  }
+}
 
 const AEREO_TEXT = {
   pt: {
@@ -63,6 +79,7 @@ export const swapDefaultText = (
   if (from === to) return text
   if (settings && same(settings[field][from])) return settings[field][to]
   if (same(AEREO_TEXT[from][field])) return AEREO_TEXT[to][field]
+  if (field === 'intro') for (const k of ['aereo', 'pacote'] as const) if (same(DIRETO_TEXT[from][k])) return DIRETO_TEXT[to][k]
   return text
 }
 
@@ -138,6 +155,20 @@ const routeContent = (r: RouteTemplate, lang: Lang): TemplateContent => {
 export const builtinContent = (id: string, lang: Lang): TemplateContent | null => {
   const route = ROUTE_TEMPLATES.find((r) => r.id === id)
   if (route) return routeContent(route, lang)
+  if (id === 'direto-aereo' || id === 'direto-pacote') {
+    const tx = DIRETO_TEXT[lang]
+    const aereo = id === 'direto-aereo'
+    const f = () => flight({ stops: '', baggage: '1 mala despachada 23kg', fare: structuredClone(FARE_PRESETS.standard.fare), fareClass: FARE_PRESETS.standard.fare.name })
+    return {
+      kind: aereo ? 'aereo' : 'pacote',
+      intro: aereo ? tx.aereo : tx.pacote,
+      conditions: aereo ? AEREO_TEXT[lang].conditions : '',
+      showItemPrices: true,
+      destination: { city: '', country: '', image: '', period: '' },
+      options: [{ ...newOption(tx.option), highlight: true, flights: [f(), f()] }],
+      itinerary: []
+    }
+  }
   if (id !== 'aereo-ida-volta' && id !== 'aereo-ida') return null
   const tx = AEREO_TEXT[lang]
   const roundTrip = id === 'aereo-ida-volta'
@@ -165,7 +196,7 @@ const reId = <T extends { id: string }>(items: T[]) => items.map((i) => ({ ...st
 export const applyTemplate = (p: Proposal, c: TemplateContent) => {
   p.kind = c.kind
   p.intro = c.intro
-  p.conditions = c.conditions
+  p.conditions = c.conditions || p.conditions
   p.showItemPrices = c.showItemPrices
   p.destination = { ...p.destination, ...c.destination }
   p.options = c.options.map((o) => ({
