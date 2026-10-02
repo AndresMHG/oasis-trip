@@ -1,7 +1,7 @@
 <template>
   <div class="cx">
     <div v-for="(c, i) in list" :key="c.id" class="cx__row">
-      <label class="field"><span>Aeroporto da conexão</span><input v-model="c.airport" placeholder="Panamá (PTY)" /></label>
+      <label class="field"><span>Aeroporto da conexão</span><PlaceInput v-model="c.airport" placeholder="Panamá (PTY)" /></label>
       <label class="field"><span>Chega</span><input v-model="c.arrive" type="time" /></label>
       <label class="field"><span>Sai</span><input v-model="c.depart" type="time" /></label>
       <span class="cx__wait" :class="{ warn: layoverMinutes(c.arrive, c.depart) > 0 && layoverMinutes(c.arrive, c.depart) < 60 }">

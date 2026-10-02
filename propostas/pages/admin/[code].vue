@@ -1,5 +1,6 @@
 <template>
   <main v-if="p" class="ed">
+    <PasteQuoteDialog v-if="pasteOpen" :currency="p.currency" @close="pasteOpen = false" @apply="applyPasted" />
     <!-- Barra de ações -->
     <div class="ed__bar">
       <NuxtLink to="/admin" class="btn btn--ghost btn--icon" title="Voltar"><Icon name="chevron-left" /></NuxtLink>
@@ -23,8 +24,9 @@
         <!-- Cliente -->
         <EditorSection title="Cliente" icon="users" :summary="clientSummary">
           <div class="grid-form">
-            <label class="field c6"><span>Nome</span><input v-model="p.client.name" placeholder="Ex.: Maria Fernanda" autofocus /></label>
-            <label class="field c6"><span>WhatsApp</span><input v-model="p.client.whatsapp" type="tel" inputmode="tel" placeholder="+55 41 99999-9999" /></label>
+            <label class="field c6"><span>Nome</span><input v-model="p.client.name" placeholder="Ex.: Maria Fernanda" autofocus list="dl-clients" @change="fillClient" /></label>
+            <datalist id="dl-clients"><option v-for="c in pastClients" :key="c.name" :value="c.name">{{ c.whatsapp }}</option></datalist>
+            <label class="field c6"><span>WhatsApp</span><input v-model="p.client.whatsapp" type="tel" inputmode="tel" placeholder="+55 41 99999-9999" @change="langFromPhone" /></label>
             <label class="field c6"><span>E-mail</span><input v-model="p.client.email" type="email" placeholder="cliente@email.com" /></label>
             <label class="field c3">
               <span>Idioma</span>
@@ -37,13 +39,16 @@
         <!-- Destino -->
         <EditorSection title="Destino" icon="pin" :summary="destSummary">
           <div class="grid-form">
-            <label class="field c4"><span>Saindo de</span><input v-model="p.destination.origin" placeholder="Curitiba (CWB)" /></label>
-            <label class="field c4"><span>{{ isAereo ? 'Cidade de destino' : 'Destino' }}</span><input v-model="p.destination.city" placeholder="Rio de Janeiro" /></label>
+            <label class="field c4"><span>Saindo de</span><PlaceInput v-model="p.destination.origin" placeholder="Curitiba (CWB)" /></label>
+            <label class="field c4"><span>{{ isAereo ? 'Cidade de destino' : 'Destino' }}</span><PlaceInput v-model="p.destination.city" :with-code="isAereo" :placeholder="isAereo ? 'Rio de Janeiro (GIG)' : 'Rio de Janeiro'" @pick="(c) => (p.destination.country = c.country)" /></label>
             <label class="field c4"><span>País</span><input v-model="p.destination.country" placeholder="Brasil" /></label>
             <label class="field c3"><span>Data de ida</span><input v-model="p.destination.departDate" type="date" /></label>
             <label class="field c3"><span>{{ isAereo ? 'Volta (vazio = só ida)' : 'Data de volta' }}</span><input v-model="p.destination.returnDate" type="date" :min="p.destination.departDate" /></label>
             <label v-if="!isAereo" class="field c4"><span>Período</span><input v-model="p.destination.period" :placeholder="autoPeriod || '7 dias / 6 noites'" /></label>
             <label class="field" :class="isAereo ? 'c6' : 'c2'"><span>{{ isAereo ? 'Passageiros' : 'Viajantes' }}</span><input v-model.number="p.destination.travelers" type="number" min="1" /></label>
+            <div v-if="p.destination.origin && p.destination.city" class="field invert-row">
+              <button type="button" class="btn btn--sm" @click="invertRoute"><Icon name="swap" :size="15" /> Inverter rota ({{ p.destination.city }} → {{ p.destination.origin }})</button>
+            </div>
             <div class="field"><span>Imagem principal do destino</span><ImageInput v-model="p.destination.image" :suggest="p.destination.city" /></div>
           </div>
         </EditorSection>
@@ -77,6 +82,7 @@
               <div class="c6 opts__tools">
                 <label class="toggle"><input v-model="opt.highlight" type="checkbox" /> Destacar como recomendada</label>
                 <span class="spacer" />
+                <button class="btn btn--sm btn--paste" title="Colar o texto de uma cotação e preencher os voos" @click="pasteOpen = true"><Icon name="file" :size="15" /> Colar cotação</button>
                 <button class="btn btn--sm" title="Duplicar opção" @click="dupOption"><Icon name="copy" :size="15" /> Duplicar</button>
                 <button v-if="p.options.length > 1" class="btn btn--sm btn--icon btn--danger" title="Excluir opção" @click="removeOption"><Icon name="trash" :size="15" /></button>
               </div>
@@ -102,7 +108,7 @@
             </EditorSection>
 
             <EditorSection title="Passeios" icon="map" :summary="countLabel(opt.tours.length, 'passeio', 'passeios')">
-              <ItemsEditor v-model="opt.tours" noun="Passeio" :image-suggest="p.destination.city" :fields="tourFields" :create="newTour" :currency="p.currency"
+              <ItemsEditor v-model="opt.tours" noun="Passeio" :image-suggest="p.destination.city" :fields="tourFields" :create="createTour" :currency="p.currency"
                 :title="(t) => t.name" :subtitle="(t) => [fmtDay(t.date), t.duration].filter(Boolean).join(' · ')" />
             </EditorSection>
 
@@ -249,10 +255,13 @@
 <script setup lang="ts">
 import type { FieldDef } from '~/components/ItemsEditor.vue'
 import { findPlace, photoUrl } from '~/utils/photoBank'
+import { swapDefaultText } from '~/utils/templates'
+import { countryOf } from '~/utils/cities'
+import { optionNameFor } from '~/composables/useProposalText'
 import {
   AIRLINES, BAGGAGE, BOARDS, LEGS, STATUS, STOPS, VEHICLES,
   migrateOptionFare, money, paymentValues, newDay, newFlight, newHotel, newOption, newTour, newTransfer, nightsBetween, optionTotals, tripFinished, uid,
-  type Hotel, type Proposal, type Settings
+  type Flight, type Hotel, type Proposal, type Settings
 } from '~/utils/proposal'
 
 definePageMeta({ layout: 'admin', middleware: 'auth' })
@@ -284,6 +293,98 @@ onMounted(async () => {
   await nextTick()
   save.value = 'saved'
 })
+
+/* ---------- Preenchimento automático ---------- */
+interface PastClient { name: string; whatsapp: string; email: string; lang: 'pt' | 'es'; travelers: number }
+const pastClients = ref<PastClient[]>([])
+onMounted(async () => {
+  const list = await api<{ code: string; updatedAt: string; client: PastClient }[]>('/api/admin/proposals').catch(() => [])
+  const seen = new Map<string, PastClient>()
+  for (const r of [...list].sort((a, b) => b.updatedAt.localeCompare(a.updatedAt))) {
+    const k = r.client?.name?.trim().toLowerCase()
+    if (k && r.code !== route.params.code && !seen.has(k)) seen.set(k, r.client)
+  }
+  pastClients.value = [...seen.values()]
+})
+/** Cliente que já recebeu proposta → completa WhatsApp, e-mail, idioma e viajantes */
+const fillClient = () => {
+  const c = pastClients.value.find((x) => x.name.trim().toLowerCase() === p.value?.client.name.trim().toLowerCase())
+  if (!c || !p.value) return
+  const cl = p.value.client
+  cl.whatsapp ||= c.whatsapp
+  cl.email ||= c.email
+  if (c.lang && c.lang !== cl.lang) cl.lang = c.lang
+  if (c.travelers && cl.travelers <= 1) cl.travelers = c.travelers
+  show('Dados do cliente preenchidos a partir da última proposta')
+}
+/** DDI do WhatsApp → idioma (+55 português; países de língua espanhola → espanhol) */
+const ES_DDI = ['58', '57', '51', '56', '54', '52', '53', '34', '507', '506', '503', '502', '504', '505', '591', '593', '595', '598', '1809', '1829', '1849']
+const langFromPhone = () => {
+  const d = (p.value?.client.whatsapp || '').replace(/\D/g, '')
+  if (!p.value || !(p.value.client.whatsapp || '').trim().startsWith('+')) return
+  const lang = d.startsWith('55') ? 'pt' : ES_DDI.some((x) => d.startsWith(x)) ? 'es' : null
+  if (lang && lang !== p.value.client.lang) {
+    p.value.client.lang = lang
+    show(lang === 'es' ? 'Idioma da proposta: Español 🇪🇸' : 'Idioma da proposta: Português 🇧🇷')
+  }
+}
+/** Troca origem ↔ destino da proposta e de todos os voos (ex.: Manaus → Curitiba vira Curitiba → Manaus) */
+const invertRoute = () => {
+  const d = p.value!.destination
+  const from = d.origin || ''
+  d.origin = d.city
+  d.city = from
+  d.country = countryOf(from) || d.country
+  for (const o of p.value!.options) {
+    for (const f of o.flights) {
+      [f.origin, f.destination] = [f.destination, f.origin]
+      f.connections?.reverse()
+    }
+  }
+  show('Rota invertida — confira datas e horários')
+}
+/** Conexões informadas → campo "Escalas" acompanha (1 conexão, 2 conexões…) */
+watch(
+  () => p.value?.options.flatMap((o) => o.flights.map((f) => f.connections?.filter((c) => c.airport).length || 0)).join(','),
+  () => {
+    for (const o of p.value?.options || []) for (const f of o.flights) {
+      const n = f.connections?.filter((c) => c.airport).length || 0
+      if (n && (!f.stops || STOPS.includes(f.stops))) f.stops = n === 1 ? '1 conexão' : `${n} conexões`
+    }
+  }
+)
+
+/* ---------- Colar cotação: texto copiado → voos preenchidos ---------- */
+const pasteOpen = ref(false)
+const applyPasted = ({ flights, mode }: { flights: Flight[]; mode: 'new' | 'replace' }) => {
+  const P = p.value!
+  if (mode === 'new') {
+    const o = newOption(nextOptionName())
+    P.options.push(o)
+    cur.value = P.options.length - 1
+  }
+  const o = P.options[cur.value]
+  // Mantém o que o modelo já tinha (tarifa, bagagem) quando o texto não traz
+  o.flights = flights.map((f, i) => {
+    const old = o.flights[i]
+    if (!old) return f
+    const keep = (k: keyof Flight) => (f[k] === '' || f[k] === undefined || f[k] === 0 ? old[k] : f[k])
+    return { ...old, ...f, id: old.id, airline: keep('airline'), baggage: keep('baggage'), fare: old.fare, fareClass: old.fareClass, leg: old.leg } as Flight
+  })
+  // Nome da opção com a companhia, se ainda for o nome genérico
+  const airline = flights.find((f) => f.airline)?.airline
+  if (airline && /^(Opção|Opción) \d+$/.test(o.name.trim())) o.name = `${o.name.trim()} · ${airline}`
+  // Destino e datas da proposta, se ainda estiverem vazios
+  const d = P.destination
+  const [ida] = flights
+  const volta = flights.length > 1 ? flights[flights.length - 1] : null
+  d.origin ||= ida.origin
+  if (!d.city) { d.city = ida.destination; d.country ||= countryOf(ida.destination) }
+  d.departDate ||= ida.date
+  if (volta) d.returnDate ||= volta.date
+  pasteOpen.value = false
+  show(`${flights.length} ${flights.length === 1 ? 'voo preenchido' : 'voos preenchidos'} — confira horários e preço`)
+}
 
 /* ---------- Salvamento automático ---------- */
 const save = ref<'saved' | 'dirty' | 'saving' | 'error' | 'init'>('init')
@@ -352,8 +453,10 @@ const send = async () => {
 watch(() => p.value?.client.lang, (lang, old) => {
   const s = settings.value
   if (!p.value || !s || !lang || !old || lang === old) return
-  if (p.value.intro.trim() === s.intro[old].trim()) p.value.intro = s.intro[lang]
-  if (p.value.conditions.trim() === s.conditions[old].trim()) p.value.conditions = s.conditions[lang]
+  p.value.intro = swapDefaultText(p.value.intro, 'intro', old, lang, s)
+  p.value.conditions = swapDefaultText(p.value.conditions, 'conditions', old, lang, s)
+  // Nomes de opção sugeridos também mudam de idioma
+  if (lang === 'es') for (const o of p.value.options) o.name = optionNameFor(o.name, 'es')
 })
 watch(() => p.value?.client.travelers, (n, old) => {
   if (p.value && n && p.value.destination.travelers === old) p.value.destination.travelers = n
@@ -470,13 +573,26 @@ watch(autoPeriod, (v, old) => {
 })
 
 /* ---------- Opções ---------- */
-const optionNames = computed(() =>
-  p.value?.client.lang === 'es'
-    ? ['Opción Esencial', 'Opción Completa', 'Opción Premium']
-    : ['Opção Essencial', 'Opção Completa', 'Opção Premium']
-)
+const optionNames = computed(() => {
+  const es = p.value?.client.lang === 'es'
+  const n = (p.value?.options.length || 0) + 1
+  if (isAereo.value) {
+    const O = es ? 'Opción' : 'Opção'
+    const tags = es
+      ? ['Más rápida', 'Más económica', 'Vuelo directo', 'Mejor horario', 'Con equipaje', ...AIRLINES.slice(0, 6)]
+      : ['Mais rápida', 'Mais econômica', 'Voo direto', 'Melhor horário', 'Com bagagem', ...AIRLINES.slice(0, 6)]
+    return tags.map((t) => `${O} ${cur.value + 1} · ${t}`).concat(tags.map((t) => `${O} ${n} · ${t}`))
+  }
+  return es ? ['Opción Esencial', 'Opción Completa', 'Opción Premium'] : ['Opção Essencial', 'Opção Completa', 'Opção Premium']
+})
+const nextOptionName = () => {
+  const es = p.value?.client.lang === 'es'
+  const n = p.value!.options.length + 1
+  if (isAereo.value) return `${es ? 'Opción' : 'Opção'} ${n}`
+  return (es ? ['Opción Esencial', 'Opción Completa', 'Opción Premium'] : ['Opção Essencial', 'Opção Completa', 'Opção Premium'])[n - 1] || `${es ? 'Opción' : 'Opção'} ${n}`
+}
 const addOption = () => {
-  const o = newOption(optionNames.value[p.value!.options.length] || `Opção ${p.value!.options.length + 1}`)
+  const o = newOption(nextOptionName())
   p.value!.options.push(o)
   cur.value = p.value!.options.length - 1
 }
@@ -485,7 +601,7 @@ const dupOption = () => {
   const reId = <T extends { id: string }>(l: T[]) => l.map((i) => ({ ...i, id: uid() }))
   const copy = {
     ...src, id: uid(), highlight: false,
-    name: optionNames.value[p.value!.options.length] || `${src.name} (cópia)`,
+    name: isAereo.value ? `${src.name} (cópia)` : nextOptionName(),
     flights: reId(src.flights), hotels: reId(src.hotels), tours: reId(src.tours), transfers: reId(src.transfers)
   }
   p.value!.options.splice(cur.value + 1, 0, copy)
@@ -533,10 +649,25 @@ const createTransfer = () => {
   const list = opt.value!.transfers
   const d = p.value!.destination
   t.passengers = p.value!.client.travelers
-  if (!list.length) { t.origin = 'Aeroporto'; t.destination = 'Hotel'; t.date = d.departDate }
-  else { t.origin = 'Hotel'; t.destination = 'Aeroporto'; t.date = d.returnDate }
+  const hotel = opt.value!.hotels.find((h) => h.name)?.name || 'Hotel'
+  if (!list.length) { t.origin = transferPlaces.value[0]; t.destination = hotel; t.date = d.departDate }
+  else { t.origin = hotel; t.destination = transferPlaces.value[0]; t.date = d.returnDate }
   return t
 }
+const createTour = () => {
+  const t = newTour()
+  t.location = p.value!.destination.city.replace(/\s*\([A-Z]{3}\)\s*$/, '')
+  t.date = p.value!.destination.departDate
+  return t
+}
+/** Sugestões de origem/destino do transfer: aeroporto do destino, hotéis desta opção, porto, centro */
+const transferPlaces = computed(() => {
+  const d = p.value?.destination
+  const es = p.value?.client.lang === 'es'
+  const airport = d?.city ? `${es ? 'Aeropuerto' : 'Aeroporto'} ${d.city}` : (es ? 'Aeropuerto' : 'Aeroporto')
+  const hotels = (opt.value?.hotels || []).map((h) => h.name).filter(Boolean)
+  return [airport, ...hotels, 'Hotel', es ? 'Puerto / Muelle' : 'Porto / Píer', es ? 'Centro' : 'Centro', es ? 'Rodoviaria' : 'Rodoviária']
+})
 const generateDays = () => {
   const es = p.value!.client.lang === 'es'
   p.value!.itinerary = Array.from({ length: dayCount.value }, (_, i) =>
@@ -548,8 +679,8 @@ const generateDays = () => {
 const flightFields: FieldDef[] = [
   { key: 'leg', label: 'Trecho', cls: 'c3', list: LEGS, placeholder: 'Automático (Ida/Volta)' },
   { key: 'airline', label: 'Companhia aérea', cls: 'c3', list: AIRLINES },
-  { key: 'origin', label: 'Origem', cls: 'c3', placeholder: 'São Paulo (GRU)' },
-  { key: 'destination', label: 'Destino', cls: 'c3', placeholder: 'Bogotá (BOG)' },
+  { key: 'origin', label: 'Origem', type: 'place', cls: 'c3', placeholder: 'São Paulo (GRU)' },
+  { key: 'destination', label: 'Destino', type: 'place', cls: 'c3', placeholder: 'Bogotá (BOG)' },
   { key: 'date', label: 'Data', type: 'date', cls: 'c3' },
   { key: 'departTime', label: 'Saída', type: 'time', cls: 'c3' },
   { key: 'arriveTime', label: 'Chegada', type: 'time', cls: 'c3' },
@@ -584,16 +715,16 @@ const tourFields: FieldDef[] = [
   { key: 'included', label: 'O que está incluído (1 por linha)', type: 'textarea', cls: 'c6', placeholder: 'Guia bilíngue\nIngressos\nTransporte' },
   { key: 'notIncluded', label: 'Não incluído (1 por linha)', type: 'textarea', cls: 'c6', placeholder: 'Almoço\nGorjetas' }
 ]
-const transferFields: FieldDef[] = [
-  { key: 'origin', label: 'Origem', cls: 'c6' },
-  { key: 'destination', label: 'Destino', cls: 'c6' },
+const transferFields = computed<FieldDef[]>(() => [
+  { key: 'origin', label: 'Origem', cls: 'c6', list: transferPlaces.value },
+  { key: 'destination', label: 'Destino', cls: 'c6', list: transferPlaces.value },
   { key: 'date', label: 'Data', type: 'date', cls: 'c3' },
   { key: 'time', label: 'Horário', type: 'time', cls: 'c3' },
   { key: 'vehicle', label: 'Veículo', cls: 'c3', list: VEHICLES },
   { key: 'passengers', label: 'Passageiros', type: 'number', cls: 'c3' },
   { key: 'price', label: 'Preço', type: 'money', cls: 'c4' },
   { key: 'notes', label: 'Observações', cls: 'c8' }
-]
+])
 const dayFields: FieldDef[] = [
   { key: 'title', label: 'Título do dia', placeholder: 'Ex.: Cristo Redentor e Pão de Açúcar' },
   { key: 'description', label: 'Descrição das atividades', type: 'textarea' }
@@ -612,6 +743,8 @@ const dayFields: FieldDef[] = [
 .save--saved { color: var(--c-ok); }
 .save--error { color: var(--c-danger); }
 .ed__actions { display: flex; gap: 6px; }
+.invert-row { align-items: flex-start; }
+.btn--paste { border-color: var(--c-primary-300); color: var(--c-primary); }
 .status-select { font: inherit; font-size: .85rem; font-weight: 600; border: 1.5px solid var(--c-line); border-radius: 999px; padding: 7px 10px; background: #fff; }
 @media (max-width: 760px) {
   .ed__bar { top: 54px; }

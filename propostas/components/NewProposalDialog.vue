@@ -23,6 +23,14 @@
         </button>
       </div>
 
+      <h3>Rotas prontas <span class="h3-note">— só falta data, horário e preço</span></h3>
+      <div class="tpls tpls--routes">
+        <button v-for="r in ROUTE_TEMPLATES" :key="r.id" class="tpl tpl--route" :disabled="busy" @click="$emit('create', { lang, template: r.id })">
+          <span class="tpl__ico tpl__ico--plane"><Icon name="plane" :size="20" /></span>
+          <span class="tpl__txt"><strong>{{ routeName(r) }}</strong><small>{{ routeDescription(r) }}</small></span>
+        </button>
+      </div>
+
       <template v-if="saved.length">
         <h3>Meus modelos</h3>
         <div class="tpls">
@@ -46,7 +54,7 @@
 </template>
 
 <script setup lang="ts">
-import { BUILTIN_TEMPLATES } from '~/utils/templates'
+import { BUILTIN_TEMPLATES, ROUTE_TEMPLATES, routeDescription, routeName } from '~/utils/templates'
 import type { Kind, Lang } from '~/utils/proposal'
 
 defineProps<{ busy?: boolean }>()
@@ -92,5 +100,9 @@ h3 { font-size: .8rem; text-transform: uppercase; letter-spacing: .6px; color: v
 .tpl__txt strong { color: var(--c-primary); font-family: var(--ff-head); font-size: .98rem; }
 .tpl__txt small { color: var(--c-gray); font-size: .83rem; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
 .tpl__go { color: var(--c-gray-300); }
+.h3-note { text-transform: none; letter-spacing: 0; font-weight: 500; }
+.tpls--routes { grid-template-columns: repeat(auto-fit, minmax(210px, 1fr)); }
+.tpl--route { padding: 10px 12px; gap: 10px; }
+.tpl--route .tpl__ico { width: 38px; height: 38px; }
 .hint { background: var(--c-bg-soft); border-radius: 10px; padding: 10px 12px; }
 </style>

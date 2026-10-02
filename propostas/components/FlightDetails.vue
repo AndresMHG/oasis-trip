@@ -21,7 +21,7 @@
 
     <!-- Tarifa deste voo, em poucas linhas -->
     <div v-if="fare" class="fd__fare">
-      <p class="fd__fare-name"><Icon name="shield" :size="15" /> {{ t.fareShort }}<template v-if="fare.name">: <strong>{{ fare.name }}</strong></template></p>
+      <p class="fd__fare-name"><Icon name="shield" :size="15" /> {{ t.fareShort }}<template v-if="fare.name">: <strong>{{ lang === 'es' ? fareNameEs(fare.name) : fare.name }}</strong></template></p>
       <p v-if="included.length" class="fd__inc"><Icon name="check" :size="14" :stroke="2.6" /> {{ included.join(' · ') }}</p>
       <p v-if="notIncluded.length && included.length" class="fd__not">{{ t.notIncludedShort }}: {{ notIncluded.join(', ').toLowerCase() }}</p>
       <p v-if="fare.change" class="fd__rule"><i :class="`dot dot--${FARE_TONE.change[fare.change]}`" /> <span><b>{{ t.fareChange }}:</b> {{ changeText }}</span></p>
@@ -38,6 +38,7 @@ import { FARE_FEATURES, FARE_TONE, fmtMinutes, layoverMinutes, money, type Curre
 
 const props = defineProps<{ flight: Flight; t: any; currency: Currency; lang: Lang }>()
 const fare = computed(() => props.flight.fare)
+const fareNameEs = (n: string) => n.replace(/Econômica/g, 'Económica').replace(/Executiva/g, 'Ejecutiva')
 const included = computed(() => FARE_FEATURES.filter((f) => fare.value?.features?.[f]).map((f) => props.t.fareFeatures[f]))
 const notIncluded = computed(() => FARE_FEATURES.filter((f) => !fare.value?.features?.[f]).map((f) => props.t.fareFeatures[f]))
 const fee = (v: number) => (v ? ` · ${props.t.feePerPerson(money(v, props.currency, props.lang))}` : '')

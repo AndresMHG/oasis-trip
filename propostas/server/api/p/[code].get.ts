@@ -1,11 +1,13 @@
 import {
   effectiveStatus, fareHasInfo, migrateOptionFare, mixCatalog, mixWorthIt, optionTotals, today, tripFinished
 } from '../../../utils/proposal'
+import { swapDefaultText } from '../../../utils/templates'
 
 // Proposta pública (link do cliente) — somente leitura, sem dados internos.
 export default defineEventHandler(async (event) => {
   const p = await requireProposal(event)
   const settings = await getSettings()
+  const lang = p.client.lang === 'es' ? 'es' : 'pt'
 
   return {
     code: p.code,
@@ -17,9 +19,10 @@ export default defineEventHandler(async (event) => {
     showItemPrices: p.showItemPrices,
     client: { name: p.client.name, lang: p.client.lang, travelers: p.client.travelers },
     destination: p.destination,
-    intro: p.intro,
+    // Proposta em espanhol com o texto padrão ainda em português → mostra a versão em espanhol
+    intro: swapDefaultText(p.intro, 'intro', lang === 'es' ? 'pt' : 'es', lang, settings),
     itinerary: p.itinerary,
-    conditions: p.conditions,
+    conditions: swapDefaultText(p.conditions, 'conditions', lang === 'es' ? 'pt' : 'es', lang, settings),
     reservedOptionId: p.reservedOptionId,
     reservedMix: p.reservedMix || null,
     // "Monte do seu jeito" precisa dos preços de cada item e de 2+ opções para combinar

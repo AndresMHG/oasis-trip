@@ -79,7 +79,7 @@
             @click="cur = i"
           >
             <span v-if="o.highlight" class="choice__tag"><Icon name="star" :size="12" /> {{ t.recommended }}</span>
-            <strong>{{ o.name }}</strong>
+            <strong>{{ on(o.name) }}</strong>
             <span class="choice__price">{{ money(o.totals.total, p.currency, lang) }}</span>
             <small v-if="travelers > 1">{{ money(o.totals.total / travelers, p.currency, lang) }} {{ t.perPerson }}</small>
             <small v-if="payOf(o.totals.total)?.n && p.payment?.interestFree" class="choice__inst">
@@ -117,12 +117,12 @@
             @click="isMix && pickFlight(g.leg!, e.item.id)"
           >
             <div class="flight__top">
-              <span class="flight__airline">{{ e.item.airline }}<em v-if="e.item.fare?.name || e.item.fareClass">{{ e.item.fare?.name || v(e.item.fareClass!) }}</em></span>
+              <span class="flight__airline">{{ e.item.airline }}<em v-if="e.item.fare?.name || e.item.fareClass">{{ v(e.item.fare?.name || e.item.fareClass || '') }}</em></span>
               <span v-if="e.item.date" class="muted">{{ fmtLong(e.item.date) }}</span>
             </div>
             <div v-if="e.badges.length || e.from" class="badges">
               <span v-for="b in e.badges" :key="b" class="badge" :class="`badge--${b}`">{{ b === 'cheap' ? t.cheapest : t.fastest }}</span>
-              <span v-if="e.from" class="badge badge--from">{{ e.from }}</span>
+              <span v-if="e.from" class="badge badge--from">{{ on(e.from) }}</span>
             </div>
             <div class="flight__route">
               <div><strong>{{ e.item.departTime || '—' }}</strong><span>{{ e.item.origin }}</span></div>
@@ -167,7 +167,7 @@
                 <span v-if="e.item.nights" class="hotel__nights">{{ e.item.nights }} {{ t.nights }}</span>
               </div>
               <div class="hotel__body">
-                <div v-if="e.from" class="badges"><span class="badge badge--from">{{ e.from }}</span></div>
+                <div v-if="e.from" class="badges"><span class="badge badge--from">{{ on(e.from) }}</span></div>
                 <h3>{{ e.item.name }}</h3>
                 <p v-if="e.item.address" class="muted small"><Icon name="pin" :size="14" /> {{ e.item.address }}</p>
                 <div class="kv">
@@ -262,7 +262,7 @@
       <section id="investimento" v-reveal class="block">
         <h2 class="block__title"><Icon name="wallet" /> {{ t.investment }}</h2>
         <div class="invest">
-          <span class="invest__opt">{{ opt.name }}</span>
+          <span class="invest__opt">{{ on(opt.name) }}</span>
           <ul class="lines">
             <li v-for="(l, i) in priceLines" :key="i">
               <span class="lines__txt"><strong>{{ l.label }}</strong><small v-if="l.detail">{{ l.detail }}</small></span>
@@ -343,7 +343,7 @@
     <!-- Barra fixa inferior -->
     <div class="dock" :class="{ show: dockVisible }">
       <div class="dock__price">
-        <small>{{ p.options.length > 1 ? opt.name : t.total }}</small>
+        <small>{{ p.options.length > 1 ? on(opt.name) : t.total }}</small>
         <strong>{{ money(opt.totals.total, p.currency, lang) }}</strong>
         <small v-if="pay?.n && pay.interestFree" class="dock__inst">{{ t.payShort(pay.n, money(pay.installment, p.currency, lang)) }}</small>
       </div>
@@ -356,7 +356,7 @@
       <div v-if="sheet" class="sheet-bg" @click.self="sheet = null">
         <div class="sheet">
           <template v-if="sheet === 'confirm'">
-            <h3>{{ t.confirmReserve(opt.name) }}</h3>
+            <h3>{{ t.confirmReserve(on(opt.name)) }}</h3>
             <p class="sheet__total">{{ money(opt.totals.total, p.currency, lang) }}</p>
             <p class="muted small"><Icon name="shield" :size="14" /> {{ t.noPayment }}</p>
             <button class="btn btn--accent btn--lg btn--block" :disabled="reserving" @click="reserve">{{ t.confirmBtn }}</button>
@@ -408,7 +408,7 @@ const { data, error } = await useFetch<PublicProposal>(`/api/p/${code}`)
 const p = computed(() => data.value)
 
 const lang = computed(() => p.value?.client.lang || 'pt')
-const { t: tRef, v } = useProposalText(lang)
+const { t: tRef, v, on } = useProposalText(lang)
 const t = computed(() => tRef.value)
 
 /* ---------- Opção selecionada (ou "Monte do seu jeito" = MIX) ---------- */
@@ -458,7 +458,7 @@ const opt = computed<PublicOption>(() => {
 })
 
 const optionNames = (ids: string[]) =>
-  ids.map((id) => p.value!.options.find((o) => o.id === id)?.name).filter(Boolean).join(' / ')
+  ids.map((id) => p.value!.options.find((o) => o.id === id)?.name).filter(Boolean).map((n) => on(n!)).join(' / ')
 
 interface Entry<T> { item: T; selected: boolean; badges: ('cheap' | 'fast')[]; from: string }
 const fixed = <T>(items: T[]): Entry<T>[] => items.map((item) => ({ item, selected: false, badges: [], from: '' }))
@@ -584,7 +584,7 @@ const pay = computed(() => (opt.value ? payOf(opt.value.totals.total) : null))
 const waHelp = computed(() => waUrl(agencyWa.value, t.value.waHello(p.value?.client.name || '', code)))
 // Na montagem, a mensagem já leva a combinação escolhida
 const waReserve = computed(() => {
-  const base = t.value.waReserve(p.value?.client.name || '', code, opt.value?.name || '')
+  const base = t.value.waReserve(p.value?.client.name || '', code, on(opt.value?.name || ''))
   if (!isMix.value) return waUrl(agencyWa.value, base)
   const detail = priceLines.value.map((l) => `• ${l.label}: ${l.detail}`).join('\n')
   return waUrl(agencyWa.value, `${base}\n\n${detail}\n${t.value.total}: ${money(opt.value.totals.total, p.value!.currency, lang.value)}`)

@@ -28,6 +28,7 @@
             </button>
           </template>
           <textarea v-else-if="f.type === 'textarea'" v-model="item[f.key]" :placeholder="f.placeholder" :rows="f.rows || 3" />
+          <PlaceInput v-else-if="f.type === 'place'" v-model="item[f.key]" :placeholder="typeof f.placeholder === 'function' ? f.placeholder(item) : f.placeholder" />
           <select v-else-if="f.type === 'select'" v-model="item[f.key]">
             <option v-for="o in f.options" :key="o" :value="o">{{ o }}</option>
           </select>
@@ -60,7 +61,7 @@ const BLOCK_TYPES = ['image', 'fare', 'connections']
 export interface FieldDef {
   key: string
   label: string
-  type?: 'text' | 'date' | 'time' | 'number' | 'money' | 'textarea' | 'image' | 'select' | 'fare' | 'connections'
+  type?: 'text' | 'date' | 'time' | 'number' | 'money' | 'textarea' | 'image' | 'select' | 'fare' | 'connections' | 'place'
   cls?: string
   placeholder?: string | ((item: any) => string)
   options?: string[]

@@ -307,12 +307,24 @@ const values: Record<string, string> = {
   'Taxas de embarque e aeroportuárias': 'Tasas de embarque y aeroportuarias', 'Taxa de emissão': 'Cargo de emisión',
   'Taxas de embarque + taxa de emissão': 'Tasas de embarque + cargo de emisión', 'Taxa de turismo local': 'Tasa turística local',
   'Taxas e impostos': 'Tasas e impuestos',
-  'Volta': 'Vuelta', 'Trecho 3': 'Tramo 3', 'Trecho 4': 'Tramo 4',
+  'Ida': 'Ida', 'Volta': 'Vuelta', 'Trecho 3': 'Tramo 3', 'Trecho 4': 'Tramo 4',
   'Aeroporto': 'Aeropuerto', 'Quarto duplo': 'Habitación doble', 'Quarto triplo': 'Habitación triple', 'Luxo': 'Lujo', 'Suíte': 'Suite', 'Vista mar': 'Vista al mar'
 }
+
+// Palavras dos nomes de opção sugeridos (ex.: "Opção 1 · Mais rápida" → "Opción 1 · Más rápida")
+const optionWords: [RegExp, string][] = [
+  [/\bOpção\b/g, 'Opción'], [/\bOpções\b/g, 'Opciones'], [/\bVoo direto\b/gi, 'Vuelo directo'], [/\bVoo\b/g, 'Vuelo'],
+  [/\bMais econômica\b/gi, 'Más económica'], [/\bMais barata\b/gi, 'Más barata'], [/\bMais rápida\b/gi, 'Más rápida'],
+  [/\bMais confortável\b/gi, 'Más cómoda'], [/\bEconômica\b/g, 'Económica'], [/\bEssencial\b/g, 'Esencial'],
+  [/\bRecomendada\b/g, 'Recomendada'], [/\bsem escalas\b/gi, 'sin escalas'], [/\bcom bagagem\b/gi, 'con equipaje']
+]
+/** Traduz um nome de opção escrito em português, se a proposta for em espanhol */
+export const optionNameFor = (name: string, lang: Lang) =>
+  lang === 'es' ? optionWords.reduce((acc, [re, to]) => acc.replace(re, to), name || '') : name
 
 export const useProposalText = (lang: MaybeRefOrGetter<Lang>) => {
   const t = computed(() => dict[toValue(lang)] || dict.pt)
   const v = (s: string) => (toValue(lang) === 'es' ? values[s] || s : s)
-  return { t, v }
+  const on = (name: string) => optionNameFor(name, toValue(lang))
+  return { t, v, on }
 }
